@@ -1,0 +1,49 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTransactionsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('transactions', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->uuid('uuid');
+            $table->BigInteger('cart_id')->unsigned();
+            $table->BigInteger('payment_method')->default(0);
+            $table->BigInteger('store_id')->unsigned();
+            $table->string('invoice');
+            $table->BigInteger('user_id')->unsigned();
+            $table->BigInteger('admin_id')->unsigned();
+            $table->BigInteger('total')->default(0);
+            $table->integer('status')->default(0);
+            $table->text('receiver_address');
+            $table->BigInteger('shipping_costs');
+
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');        
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');        
+            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('transactions');
+    }
+}
