@@ -39,4 +39,8 @@ Route::prefix('panel')->group(function () {
     Route::get('blog','BlogController@index')->name('iBlog');
     Route::get('blog/create','BlogController@create')->name('cBlog');
     Route::post('blog/create','BlogController@store');
+    // cashier
+    Route::get('cashier','CashierController@index');
+    Route::get('cashier/create','CashierController@create')->name('cCashier');
+    Route::post('cashier','CashierController@store');
 });
