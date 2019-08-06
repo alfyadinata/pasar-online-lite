@@ -31,7 +31,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $check  =   Blog::where('title',$request->title)->first();
-
+        // dd($request->all());
         if ($check != null) {
             Alert::error('Ada Data Yang Sama.','Gagal')->autoclose(4500);
             return redirect()->back(); 
@@ -45,7 +45,7 @@ class BlogController extends Controller
             return redirect()->back();                
         } catch (\Throwable $e) {
             Alert::error('Ada Kesalahan.','Gagal')->autoclose(4500);
-            return redirect()->back();                            
+            return redirect()->back();
         }
     }
 }

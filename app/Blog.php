@@ -9,6 +9,8 @@ use Uuid;
 class Blog extends Model
 {
     use SoftDeletes;
+
+    protected $guarded  =   ['created_at','updated_at'];
     // uuid 
     protected static function boot()
     {

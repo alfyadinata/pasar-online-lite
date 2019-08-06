@@ -8,7 +8,7 @@
     <div class="main-page">
         <div class="tables">
             <h3 class="title1">Kategori</h3>
-            <a href="javascript:void(0);" data-href="{{ route('cBlog') }}" class="openPopup btn btn-primary">
+            <a href="{{ route('cBlog') }}" class="btn btn-primary">
                 Tambah +
             </a>
             <div class="table-responsive bs-example widget-shadow">
@@ -27,8 +27,9 @@
                                     </div>
                                 </th>
 
-                                <th>Nama</th>
-                                <th>Status</th> 
+                                <th>Judul</th>
+                                <th>Kategori</th>
+                                <th>Tanggal Di Buat</th> 
                                 <th>Aksi</th> 
                             </tr> 
                         </thead> 
@@ -41,8 +42,9 @@
                                         <label for="checkbox-{{ $data->id }}" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->is_product === 1 ? "Produk" : "Blog" }}</td>
+                                <td>{{ $data->title }}</td>
+                                <td>{{ $data->category->name }}</td>
+                                <td>{{ $data->created_at->format('d-m-Y') }}</td>
                                 <td>
                                         <a href="{{ route('delCategory',$data->uuid) }}" onclick="return confirm('Yakin Ingin Menghapus Data ?');" class="btn btn-danger">
                                             Hapus
