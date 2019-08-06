@@ -26,7 +26,7 @@ class CashierController extends Controller
             'email' => 'email',
             'password' => 'required'
         ]);
-        
+
         foreach ($request->name as $key => $value) {
             $check  =   User::where('email',$request->email[$key])->first();    
             if ($check == null ) {
@@ -44,5 +44,11 @@ class CashierController extends Controller
 
         return Alert::success('Berhasil Membuat Data','Sukses')->autoclose(4500);
 
+    }
+
+    public function edit($uuid)
+    {
+        $edit   =   User::where('uuid',$uuid)->firstOrFail();
+        return view('panel.cashier.edit',compact('edit'));
     }
 }
