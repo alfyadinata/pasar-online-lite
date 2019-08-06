@@ -40,7 +40,11 @@ Route::prefix('panel')->group(function () {
     Route::get('blog/create','BlogController@create')->name('cBlog');
     Route::post('blog/create','BlogController@store');
     // cashier
-    Route::get('cashier','CashierController@index');
-    Route::get('cashier/create','CashierController@create')->name('cCashier');
+    Route::get('cashier','CashierController@index')->name('iCashier');
     Route::post('cashier','CashierController@store');
+    Route::get('cashier/create','CashierController@create')->name('cCashier');
+    Route::get('cashier/edit/{uuid}','CashierController@edit')->name('eCashier');
+    Route::post('cashier/edit/{uuid}','CashierController@update')->name('uCashier');
+    Route::get('cashier/delete/{uuid}','CashierController@destroy')->name('delCashier');    
+    Route::delete('cashier/delete-many','CashierController@destroyMany')->name('delManyCashier');
 });

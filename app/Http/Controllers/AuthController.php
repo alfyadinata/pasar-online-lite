@@ -60,7 +60,7 @@ class AuthController extends Controller
                     return redirect('/panel');
                 }elseif ($check->role_id == 1) {
                     alert()->success('Login Berhasil.','Sukses !')->autoclose(4500);
-                    return redirect('/panel');
+                    return redirect('/panel/category');
                 }else {
                     alert()->error('Ada Kesalahan','Gagal !')->autoclose(4500);                
                     return redirect()->back()->withInput();

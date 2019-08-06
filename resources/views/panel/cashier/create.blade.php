@@ -29,7 +29,7 @@
     $('#plus').click(function(){
         no++;
         $('#dynamic').append(
-            '<tr id="row'+no+'"><td><input type="text" name="name[]" required class="form-control"></td><td><input required type="email" name="phone_number[]" class="form-control"></td><td><input required type="email" name="email[]" class="form-control"></td><td><input required type="password" name="password[]" class="form-control"></td><td><button type="button" id="'+no+'" class="btn btn-danger btn_remove">-</button></td></tr>'
+            '<tr id="row'+no+'"><td><input type="text" name="name[]" required class="form-control"></td><td><input required type="text" name="phone_number[]" class="form-control"></td><td><input required type="email" name="email[]" class="form-control"></td><td><input required type="password" name="password[]" class="form-control"></td><td><button type="button" id="'+no+'" class="btn btn-danger btn_remove">-</button></td></tr>'
         );
     });
 

@@ -13,7 +13,7 @@
             </a>
             <div class="table-responsive bs-example widget-shadow">
                 <h4>Data :</h4>
-                <form action="{{ route('delManyCategory') }}" onsubmit="return confirm('Yakin Ingin Menghapus Data Terpilih ?');" method="post">
+                <form action="{{ route('delManyCashier') }}" onsubmit="return confirm('Yakin Ingin Menghapus Data Terpilih ?');" method="post">
                     @csrf 
                     @method('delete')
                     <button id="btnDel" class="btn btn-danger" style="display:none;">Hapus Terpilih</button>
@@ -30,6 +30,7 @@
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>No Telpon</th> 
+                                <th>Status</th>
                                 <th>Aksi</th> 
                             </tr> 
                         </thead> 
@@ -45,11 +46,12 @@
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->email }}</td>
                                 <td>{{ $data->phone_number }}</td>
+                                <td>{{ $data->active == 0 ? "Non-Aktif" : "Aktif" }}</td>
                                 <td>
-                                        <a href="{{ route('delCategory',$data->uuid) }}" onclick="return confirm('Yakin Ingin Menghapus Data ?');" class="btn btn-danger">
+                                        <a href="{{ route('delCashier',$data->uuid) }}" onclick="return confirm('Yakin Ingin Menghapus Data ?');" class="btn btn-danger">
                                             Hapus
                                         </a>
-                                        <a data-href="{{ route('eCategory',$data->uuid) }}" class="openPopupEdit btn btn-primary">
+                                        <a data-href="{{ route('eCashier',$data->uuid) }}" class="openPopupEdit btn btn-primary">
                                             Edit
                                         </a>
                                 </td>
