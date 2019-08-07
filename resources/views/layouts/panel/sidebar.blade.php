@@ -42,7 +42,7 @@
 							<a href="#"><i class="fa fa-check-square-o nav_icon"></i>Promotion</a>
 						</li>
 						<li>
-							<a href="#"><i class="fa fa-check-square-o nav_icon"></i>App Configuration</a>
+							<a href="{{ route('iConfig') }}"><i class="fa fa-check-square-o nav_icon"></i>App Configuration</a>
 						</li>
 					@endif
 					@if(auth()->user()->role_id == 3)

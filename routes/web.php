@@ -47,4 +47,7 @@ Route::prefix('panel')->group(function () {
     Route::post('cashier/edit/{uuid}','CashierController@update')->name('uCashier');
     Route::get('cashier/delete/{uuid}','CashierController@destroy')->name('delCashier');    
     Route::delete('cashier/delete-many','CashierController@destroyMany')->name('delManyCashier');
+    // web config
+    Route::get('config','ConfigController@index')->name('iConfig');
+    Route::post('config','ConfigController@update');
 });

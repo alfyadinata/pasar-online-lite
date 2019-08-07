@@ -28,11 +28,6 @@ class CashierController extends Controller
 
     public function store(Request $request)
     {
-        // $this->validate($request,[
-        //     'name' => 'required|string',
-        //     'email' => 'email',
-        //     'password' => 'required'
-        // ]);
 
         foreach ($request->name as $key => $value) {
             $check  =   User::where('email',$request->email[$key])->first();    
@@ -48,7 +43,7 @@ class CashierController extends Controller
                 'role_id'   => 2                
             ]);
 
-            Logs::store(auth()->user()->email. ' Membuat Kasir '. $request->name[$key]);
+            Logs::store(auth()->user()->email. ' Membuat Kasir '. $request->email[$key]);
         }
 
         Alert::success('Berhasil Membuat Data','Sukses')->autoclose(4500);
