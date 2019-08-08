@@ -28,11 +28,11 @@
     <script src="{{ asset('js/custom.js')}}"></script>
     <link href="{{ asset('css/custom.css')}}" rel="stylesheet">
 </head>
-<body style="background-image: url({{ asset('logo.jpg') }}); background-size: cover;">
+<body style="background-image: url({{ asset('images/food.jpg') }}); background-size: cover;">
     @yield('content')
 
     <div class="footer">
-		   <p>© 2016 Novus Admin Panel. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts</a></p>
+		   <p>© 2019 Pasline Admin Panel</p>
 		</div>
 
     <script src="{{ asset('js/classie.js') }}"></script>
