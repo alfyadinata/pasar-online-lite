@@ -27,6 +27,24 @@
 
                         <div class="row">
                             <div class="form-group"> 
+                                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-6"> 
+                                    <input name="email" value="{{ $config->email }}" type="text" class="form-control" > 
+                                </div> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group"> 
+                                <label for="inputEmail3" class="col-sm-2 control-label">Telpon</label>
+                                <div class="col-sm-6"> 
+                                    <input name="phone_number" value="{{ $config->phone_number }}" type="text" class="form-control" > 
+                                </div> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group"> 
                                 <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
                                 <div class="col-sm-6"> 
                                     <textarea name="address" rows="5" class="form-control"> {{ $config->address }} </textarea>
