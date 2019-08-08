@@ -9,6 +9,7 @@ use Uuid;
 class Config extends Model
 {
     use SoftDeletes;
+    protected $guarded = ['created_at','updated_at'];
     // uuid 
     protected static function boot()
     {

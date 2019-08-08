@@ -16,13 +16,15 @@ class ConfigController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->all());
+        // Config::firstOrCreate($request->all());
         $config =   Config::firstOrCreate([
             'app_name'  =>  $request->app_name,
             'logo'  => $request->logo,
             'logo_2'    =>  $request->logo_2,
-            'phone_number'  =>  $request->phone_number,
+            'phone_number'  =>  '08122121',
             'address'   => $request->address,
-            'email' =>  $request->email,
+            'email' =>  'pasaronline@admin.com',
             'facebook'  =>  $request->facebook,
             'instagram' =>  $request->instagram,
             'slogan'    =>  $request->slogan,
