@@ -8,7 +8,11 @@
                 <div class="register-top">
                     <h4>SELAMAT DATANG DI PASLINE!</h4>
                 </div>
+<<<<<<< HEAD
                 <div class="register-body">
+=======
+                <div class="login-body"> 
+>>>>>>> 6883b6c7de52658ee8631bdd83750bf4e2f66425
                     <form method="POST" action="{{ route('postLogin') }}">
                         @csrf
                         

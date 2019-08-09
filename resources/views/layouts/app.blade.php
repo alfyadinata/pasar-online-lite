@@ -27,7 +27,7 @@
         </script>
     <script src="{{ asset('js/custom.js')}}"></script>
     <link href="{{ asset('css/custom.css')}}" rel="stylesheet">
-</head>
+</head> 
 <body style="background-image: url({{ asset('images/food.jpg') }}); background-size: cover;">
     @yield('content')
 
