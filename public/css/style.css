@@ -1525,6 +1525,20 @@ button.note-color-btn {
 }
 /*--//blank-page--*/
 /*--login-page--*/
+.register-top  h4 {
+    font-size: 1.1em;
+    color: white;
+    line-height: 1.8em;
+}
+.register-top{
+    padding: 1.5em;
+    text-align: center;
+    margin-top: 15%;   
+    border-radius: 15px;
+}
+.register-body{
+    padding: 2em;
+}
 .login-page {
     width: 40%;
     margin: 1em auto 0;
@@ -1542,6 +1556,7 @@ button.note-color-btn {
 .widget-shadow {
     background: transparent;
     border: 0px solid;
+    box-shadow: 1px 1px 20px 3px;
     border-radius: 15px;
 }
 .login-body {
@@ -1575,6 +1590,9 @@ button.note-color-btn {
 .login-page input.lock {
     background: url(../images/lock.png)no-repeat 8px 10px #fff;
 }
+.login-page input.phone {
+    background: url(../images/phone2.png)no-repeat 8px 10px #fff;
+}
 .login-page label.checkbox {
     margin: 0 0 0 1.3em;
     font-size: 1em;
@@ -1606,7 +1624,7 @@ button.note-color-btn {
     display:block;
 }
 .forgot a:hover{
-    color: #e94e02;
+    color: #6164C1;
 }
 .login-page input[type="submit"] {
     border: none;
