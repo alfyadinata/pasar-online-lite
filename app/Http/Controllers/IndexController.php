@@ -21,18 +21,28 @@ class IndexController extends Controller
     {
         $q  =   $request->get('q');
         $category   =   $request->category;
-
-        if ( $category != null) {
-            $products   =   Product::where('category_id',$category)->where('name','LIKE','%'.$q.'%')->get();
-            return view('fe.product',compact('products'));
-        }else {
-            $products   =   Product::where('name','LIKE','%'.$q.'%')->get();
-            return view('fe.product',compact('products'));
-        }
+                
+        // if ( $category != null) {
+        //     $products   =   Product::where('category_id',$category)->where('name','LIKE','%'.$q.'%')->get();
+        //     return view('fe.product',compact('products','q'));
+        // }else {
+        //     $products   =   Product::where('name','LIKE','%'.$q.'%')->get();
+        //     return view('fe.product',compact('products','q'));
+        // }
     }
 
     public function filter(Request $request)
     {
-        
+        $low    =   Product::orderBy('price','DESC')->where('stock','>',0)->get();
+        $high   =   Product::orderBy('price','ASC')->where('stock','>',0)->get();
+        $popular    =   Product::orderBy('visit','DESC')->where('stock','>',0)->get();
+        return view('fe.product',compact('low','high','popular'));
+    }
+
+    public function byCategory(Request $request)
+    {
+        $category   =   $request->category;
+        $products   =   Product::where('category_id',$category)->get();
+        return view('fe.product',compact('products'));
     }
 }
