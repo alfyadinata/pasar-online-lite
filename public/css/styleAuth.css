@@ -1533,7 +1533,7 @@ button.note-color-btn {
 }
 .register-top{
     padding: 1.5em;
-    /* text-align: center; */
+    text-align: center;
     margin-top: 10%;   
     border-radius: 15px;
 }
