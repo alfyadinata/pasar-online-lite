@@ -8,7 +8,7 @@
                 <div class="login-top">
                     <h4>Welcome back to Novus AdminPanel ! <br> Not a Member? <a href="signup.html">  Sign Up »</a> </h4>
                 </div>
-                <div class="login-body">
+                <div class="login-body"> 
                     <form method="POST" action="{{ route('postLogin') }}">
                         @csrf
                         
