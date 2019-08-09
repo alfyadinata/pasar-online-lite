@@ -1549,7 +1549,6 @@ button.note-color-btn {
     padding: 1.5em;
     border-bottom: 1px solid #DED9D9;
     text-align: center;
-<<<<<<< HEAD
     margin-top: 20%;   
     border-radius: 15px;
 }
@@ -1558,8 +1557,6 @@ button.note-color-btn {
     border: 0px solid;
     box-shadow: 1px 1px 20px 3px;
     border-radius: 15px;
-=======
->>>>>>> 6883b6c7de52658ee8631bdd83750bf4e2f66425
 }
 .login-body {
 	padding: 2em;

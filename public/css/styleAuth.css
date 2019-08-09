@@ -815,7 +815,8 @@ ul.dropdown-menu.drp-mnu li {
 	-o-box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.21); */
 }
 .footer  p {
-	color: #7A7676;
+    margin-top: 20px;
+	color: white;
     font-size: 1em;
 	line-height: 1.6em;
 }
@@ -1525,6 +1526,20 @@ button.note-color-btn {
 }
 /*--//blank-page--*/
 /*--login-page--*/
+.register-top  h4 {
+    font-size: 1.1em;
+    color: white;
+    line-height: 1.8em;
+}
+.register-top{
+    padding: 1.5em;
+    /* text-align: center; */
+    margin-top: 10%;   
+    border-radius: 15px;
+}
+.register-body{
+    padding: 2em;
+}
 .login-page {
     width: 40%;
     margin: 1em auto 0;
@@ -1542,6 +1557,7 @@ button.note-color-btn {
 .widget-shadow {
     background: transparent;
     border: 0px solid;
+    box-shadow: 4px 4px 17px 10px ;
     border-radius: 15px;
 }
 .login-body {
@@ -1551,6 +1567,7 @@ button.note-color-btn {
     font-size: 1.1em;
     color: white;
     line-height: 1.8em;
+    
 }
 .login-top  h4  a {
     color: #6164C1;    

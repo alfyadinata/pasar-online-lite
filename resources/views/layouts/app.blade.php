@@ -7,7 +7,7 @@
     <title>@yield('title')</title>
     <link href="{{ asset('css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
     <!-- Custom CSS -->
-    <link href="{{ asset('css/style.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{ asset('css/styleAuth.css')}}" rel='stylesheet' type='text/css' />
     <!-- font CSS -->
     <!-- font-awesome icons -->
     <link href="{{ asset('css/font-awesome.cs')}}s" rel="stylesheet"> 
