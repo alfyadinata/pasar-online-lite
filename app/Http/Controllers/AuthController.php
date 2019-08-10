@@ -12,7 +12,8 @@ class AuthController extends Controller
     // 1 = superadmin
     // 2 = kasir
     // 3 = pedagang
-    // 4 = pembeli
+    // 4 = pembeli 
+    // 5 moderator
     public function register(Request $request)
     {
         $this->validate($request,[
