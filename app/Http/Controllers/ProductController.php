@@ -8,7 +8,7 @@ use App\helpers\Visitor;
 use App\helpers\Logs;
 use Alert;
 
-class ProductController extends Controller
+class ProductController extends Controller 
 {
     public function __construct()
     {
