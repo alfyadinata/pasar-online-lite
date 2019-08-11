@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Store;
 use Alert;
 
 class AuthController extends Controller
@@ -16,6 +17,7 @@ class AuthController extends Controller
     // 5 moderator
     public function register(Request $request)
     {
+        // dd($request->All());
         $this->validate($request,[
             'name' => 'required|string|min:6',
             'password' =>'required|string|min:6',
@@ -30,8 +32,9 @@ class AuthController extends Controller
             'phone_number' => $request->phone_number,
             'role_id' => 4,
         ]);
+
         if ($user) {
-            alert()->success('Berhasil Membuat Akun','Sukses !')->autoclose(4500);
+            alert()->message('Berhasil Membuat Akun','Sukses !')->autoclose(4500);
             return redirect('login');
         }else {
             alert()->error('Ada Kesalahan.','Gagal !')->autoclose(4500);
@@ -50,19 +53,13 @@ class AuthController extends Controller
         $check  =   User::where('email',$email)->first();
         if ($check != null) {
             if (\Auth::attempt(['email' => $email,'password' => $password])) {
-                if ($check->role_id == 4) {
-                    alert()->info('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);
-                    return redirect('/');
-                }elseif ($check->role_id == 3) {
-                    alert()->info('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);
-                    return redirect('/panel');
-                }elseif ($check->role_id == 2) {
-                    alert()->info('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);
-                    return redirect('/panel');
-                }elseif ($check->role_id == 1) {
-                    alert()->info('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);
+                if ($check->role_id < 5 && $check->role_id != 4) {
+                    alert()->message('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);
                     return redirect('/panel/category');
-                }else {
+                } elseif ($check->role_id == 4) {
+                    alert()->message('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);
+                    return redirect('/');
+                } else {
                     alert()->error('Ada Kesalahan','Gagal !')->autoclose(4500);                
                     return redirect()->back()->withInput();
                 }
@@ -75,7 +72,23 @@ class AuthController extends Controller
                 return redirect()->back()->withInput();
             }
         }else {
-            alert()->error('Tidak Ada Email Yang Cocok.','Gagal !')->autoclose(4500);
+            alert()->error('Email Atau Password Salah.','Gagal !')->autoclose(4500);
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function getStoreRegister()
+    {
+        return view('auth.registerStore');
+    }
+
+    public function postStoreRegister(Request $request)
+    {
+        $store  =   new Store;
+        try {
+            $store->create($request->all());
+        } catch (\Throwable $th) {
+            alert()->error('Ada Kesalahan.','Gagal !')->autoclose(4500);
             return redirect()->back()->withInput();
         }
     }
