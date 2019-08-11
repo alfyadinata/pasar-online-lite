@@ -1535,14 +1535,6 @@ button.note-color-btn {
     padding: 1.5em;
     border-bottom: 1px solid #DED9D9;
     text-align: center;
-    margin-top: 20%;   
-    border-radius: 15px;
-}
-.widget-shadow {
-    background: transparent;
-    border: 0px solid;
-    box-shadow: 1px 1px 20px 3px;
-    border-radius: 15px;
 }
 .login-body {
 	padding: 2em;
