@@ -9,8 +9,7 @@
                     <h4>SELAMAT DATANG DI PASLINE!</h4>
                 </div>
                 <div class="register-body">
-                    <div class="login-body"> 
-                    <form method="POST" action="{{ route('postLogin') }}">
+                       <form method="POST" action="{{ route('postLogin') }}">
                         @csrf
                         
                         <!-- <input type="text" class="user" value="{{ old('name') }}" name="email" placeholder="Full Name" required=""> -->
@@ -22,9 +21,7 @@
                         <div class="forgot-grid">
                             <div class="clearfix"> </div>
                         </div>
-                        <div class="forgot">
                         <a href="signup.html">Sign Up</a>
-                        </div>
                     </form>
                 </div>
             </div>

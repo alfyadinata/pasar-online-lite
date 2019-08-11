@@ -1592,6 +1592,9 @@ button.note-color-btn {
 .login-page input.lock {
     background: url(../images/lock.png)no-repeat 8px 10px #fff;
 }
+.login-page input.phone {
+    background: url(../images/phone.png)no-repeat 8px 10px #fff;
+}
 .login-page label.checkbox {
     margin: 0 0 0 1.3em;
     font-size: 1em;
