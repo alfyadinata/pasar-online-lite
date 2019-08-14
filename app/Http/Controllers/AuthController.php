@@ -19,9 +19,9 @@ class AuthController extends Controller
     {
         // dd($request->All());
         $this->validate($request,[
-            'name' => 'required|string|min:6',
-            'password' =>'required|string|min:6',
-            'email' => 'required|string|email',
+            'name' => 'required|min:6',
+            'password' =>'required|min:6',
+            'email' => 'required|email',
         ]);
 
         $user = User::create([
@@ -53,22 +53,21 @@ class AuthController extends Controller
         $check  =   User::where('email',$email)->first();
         if ($check != null) {
             if (\Auth::attempt(['email' => $email,'password' => $password])) {
-                if ($check->role_id < 5 && $check->role_id != 4) {
-                    alert()->message('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);
-                    return redirect('/panel/category');
-                } elseif ($check->role_id == 4) {
+                if ($check->role_id == 4) {
                     alert()->message('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);
                     return redirect('/');
+                } elseif ($check->role_id < 5 && $check->role_id != 4) {
+                    alert()->message('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);
+                    return redirect('/panel/category');
                 } else {
-                    alert()->error('Ada Kesalahan','Gagal !')->autoclose(4500);                
+                    alert()->error('Ada Kesalahan','Gagal !')->autoclose(4500);
                     return redirect()->back()->withInput();
                 }
             }elseif ($check->active == 0) {
                 alert()->error('Akun Di Non-Aktifkan','Gagal !')->autoclose(4500);                
                 return redirect()->back()->withInput();
-            }
-            else {
-                alert()->error('Email Atau Password Salah.','Gagal !')->autoclose(4500);                
+            }else {
+                alert()->error('Ada Kesalahan.','Gagal !')->autoclose(4500);                
                 return redirect()->back()->withInput();
             }
         }else {
@@ -84,9 +83,28 @@ class AuthController extends Controller
 
     public function postStoreRegister(Request $request)
     {
+        // dd(time());
         $store  =   new Store;
         try {
-            $store->create($request->all());
+            $request['slug']    =   str_slug($request->name.'-'.time());
+            $request['user_id'] =   auth()->user()->id;
+            // $data   =   Store::create([
+            //     'name'  =>  $request->name,
+            //     'slug'  =>  str_slug($request->name).'-'.time(),
+            //     'address'   =>  $request->address,
+            //     'phone_number'  =>  $request->phone_number,
+            //     'user_id'   =>  auth()->user()->id
+            // ]);
+            
+            if ($store->create($request->all())) {
+                $user   =   User::where('id',auth()->user()->id)->first();
+                $user->update([
+                    'role_id' => 3
+                ]);
+                Auth::logout();
+                Alert::info('Berhasil Membuat Toko. Silahkan Contact Admin','Sukses')->autoclose(4500);
+                return redirect('/');
+            }
         } catch (\Throwable $th) {
             alert()->error('Ada Kesalahan.','Gagal !')->autoclose(4500);
             return redirect()->back()->withInput();

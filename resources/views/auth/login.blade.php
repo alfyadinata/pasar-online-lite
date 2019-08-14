@@ -15,7 +15,7 @@
                         <input type="password" name="password" class="lock" placeholder="Password">
                         <input  type="submit" name="Sign In" value="Sign In">
                         <div class="forgot-grid">
-                            <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Remember me</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox" ><i></i>Remember me</label>
                             <div class="forgot">
                                 <a href="#">Forgot password? </a> 
                                 <a href="signup.html">Sign Up</a>
