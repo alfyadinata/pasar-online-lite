@@ -1589,11 +1589,20 @@ button.note-color-btn {
 .login-page input.user {
     background: url(../images/user.png)no-repeat 8px 10px #fff;
 }
+.login-page input.address {
+    background: url(../images/address1.png)no-repeat 8px 10px #fff;
+}
+.login-page input.store {
+    background: url(../images/toko1.png)no-repeat 8px 10px #fff;
+}
+.login-page input.email {
+    background: url(../images/gmail1.png)no-repeat 8px 10px #fff;
+}
 .login-page input.lock {
     background: url(../images/lock.png)no-repeat 8px 10px #fff;
 }
 .login-page input.phone {
-    background: url(../images/phone.png)no-repeat 8px 10px #fff;
+    background: url(../images/phone1.png)no-repeat 8px 10px #fff;
 }
 .login-page label.checkbox {
     margin: 0 0 0 1.3em;
