@@ -7,6 +7,7 @@ use App\helpers\Visitor;
 use App\helpers\Logs;
 use App\User;
 use Alert;
+use DataTables;
 
 class CashierController extends Controller
 {
@@ -15,10 +16,32 @@ class CashierController extends Controller
         Visitor::create();
     }
 
+    public function api()
+    {
+        $cashiers   =   User::where('role_id',2)->latest()->get();
+        return DataTables::of($cashiers)->addIndexColumn()
+        ->addColumn('checker', function($row) {
+            $checker = '<div class="custom-checkbox custom-control">
+                            <input type="checkbox" name="checked[]" value="'. $row->uuid.'" class="checks form-control">
+                            <label for="checkbox-'.$row->uuid.'" class="custom-control-label">&nbsp;</label>
+                        </div>';
+            return $checker;
+        } )
+        ->addColumn('action', function($row) {
+            $btn    =   '<a data-href="'.route("eCashier",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
+                            '<a href="'.route("delCashier",$row->uuid).'" class="delete btn btn-danger">
+                            Hapus
+                        </a>';
+            return $btn;
+        })->addColumn('status', function($row) {
+            $checker = $row->active == 1 ? 'Aktif' : 'Non-Aktif';
+            return $checker;
+        } )->rawColumns(['action','status','checker'])->make(true);
+    }
+
     public function index()
     {
-        $cashiers   =   User::where('role_id',2)->get();
-        return view('panel.cashier.index',compact('cashiers'));
+        return view('panel.cashier.index');
     }    
 
     public function create()
@@ -38,7 +61,7 @@ class CashierController extends Controller
             User::create([
                 'name' => $request->name[$key],
                 'email' => $request->email[$key],
-                'password' => $request->password[$key],
+                'password' => bcrypt($request->password[$key]),
                 'phone_number' => $request->phone_number[$key],
                 'role_id'   => 2                
             ]);
