@@ -9,6 +9,7 @@ use Uuid;
 class Product extends Model
 {
     use SoftDeletes;
+    protected $fillable =   ['name','slug','price','description','category_id','qty','foto','foto_2','foto_3','store_id'];
     // uuid 
     protected static function boot()
     {
@@ -25,6 +26,11 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
     }
 
     public function wishlist()

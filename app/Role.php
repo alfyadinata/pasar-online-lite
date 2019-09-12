@@ -13,6 +13,7 @@ class Role extends Model
     // 3 = penjual
     // 4 = pembeli
     use SoftDeletes;
+    protected $fillable = ['name'];
     // uuid 
     protected static function boot()
     {

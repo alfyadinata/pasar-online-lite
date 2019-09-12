@@ -9,6 +9,7 @@ use Uuid;
 class Cart extends Model
 {
     use SoftDeletes;
+    protected $fillable =   ['uuid','product_id','user_id','message','qty','total','message','status'];
     // uuid 
     protected static function boot()
     {
@@ -24,7 +25,7 @@ class Cart extends Model
 
     public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function product()

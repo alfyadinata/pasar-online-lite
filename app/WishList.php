@@ -9,6 +9,7 @@ use Uuid;
 class WishList extends Model
 {
     use SoftDeletes;
+    protected $fillable =   ['uuid','product_id','user_id'];
     // uuid 
     protected static function boot()
     {
@@ -34,5 +35,3 @@ class WishList extends Model
 }
 
 
-
-// user, keranjang,product

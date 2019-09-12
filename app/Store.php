@@ -9,6 +9,7 @@ use Uuid;
 class Store extends Model
 {
     use SoftDeletes;
+    protected $fillable =   ['name','slug','user_id','phone_number','address'];
     // uuid 
     protected static function boot()
     {
@@ -25,5 +26,10 @@ class Store extends Model
     public function user()
     {
         return $this->hasOne(User::class);
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
     }
 }
