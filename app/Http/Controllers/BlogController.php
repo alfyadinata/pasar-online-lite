@@ -19,6 +19,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs  =   Blog::latest()->get();
+        // dd($)
         return view('panel.blog.index',compact('blogs'));
     }
 
@@ -28,7 +29,7 @@ class BlogController extends Controller
         return view('panel.blog.create',compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request) 
     {
         $check  =   Blog::where('title',$request->title)->first();
         // dd($request->all());
@@ -41,11 +42,27 @@ class BlogController extends Controller
         $request['slug']    =   str_slug($request->name);
         try {
             Blog::create($request->all());
+            Logs::store('Membuat blog : '.$request->name);
             Alert::success('Berhasil Membuat Data.','Sukses')->autoclose(4500);
-            return redirect()->back();                
+            return redirect()->route('iBlog');                
         } catch (\Throwable $e) {
             Alert::error('Ada Kesalahan.','Gagal')->autoclose(4500);
             return redirect()->back();
         }
+    }
+
+    public function edit($uuid)
+    {
+        $edit   =   Blog::where('uuid',$uuid)->firstOrFail();
+        $categories =   Category::where('is_product',0)->get();
+        return view('panel.blog.edit', compact('edit','categories'));
+    }
+
+    public function update(Request $request, $uuid)
+    {
+        $blog   =   Blog::where('uuid',$uuid)->firstOrFail();
+        $blog->update([
+            
+        ]);
     }
 }

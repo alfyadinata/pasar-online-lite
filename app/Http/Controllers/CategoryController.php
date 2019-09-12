@@ -7,6 +7,7 @@ use App\Category;
 use App\helpers\Visitor;
 use App\helpers\Logs;
 use Alert;
+use DataTables;
 
 class CategoryController extends Controller
 {
@@ -17,10 +18,33 @@ class CategoryController extends Controller
         Visitor::create();
     }
 
-    public function index()
+    public function api(Request $request)
     {
         $categories =   Category::latest()->get();
-        return view('panel.category.index',compact('categories'));
+        return DataTables::of($categories)->addIndexColumn()
+                        ->addColumn('checker', function($row) {
+                            $checker = '<div class="custom-checkbox custom-control">
+                                            <input type="checkbox" name="checked[]" value="'. $row->uuid.'" class="checks form-control">
+                                            <label for="checkbox-'.$row->uuid.'" class="custom-control-label">&nbsp;</label>
+                                        </div>';
+                            return $checker;
+                        } )
+                        ->addColumn('is_product', function($row) {
+                            $is_product   =  $row->is_product == 1 ? 'Produk' : 'Blog';
+                            return $is_product;
+                        })
+                        ->addColumn('action', function($row) {
+                            $btn    =   '<a data-href="'.route("eCategory",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
+                                            '<a href="'.route("delCategory",$row->uuid).'" class="delete btn btn-danger">
+                                            Hapus
+                                        </a>';
+                            return $btn;
+                        })->rawColumns(['action','is_product','checker'])->make(true);
+    }
+
+    public function index()
+    {
+        return view('panel.category.index');
     } 
 
     public function create()
@@ -57,11 +81,12 @@ class CategoryController extends Controller
 
     public function update($uuid, Request $request)
     {
+        // dd($request->all());
         $category   =   Category::where('uuid',$uuid)->firstOrFail();
         $request['slug'] = str_slug($request->name);
         $category->update($request->all());
-        Logs::store('Menghapus kategori '. $request->name);
-        Alert::success('Berhasil Membuat Data.','Sukses')->autoclose(4500);
+        Logs::store('Memperbarui kategori '. $request->name);
+        Alert::success('Berhasil Memperbarui Data.','Sukses')->autoclose(4500);
         return redirect()->back();
     }
 
@@ -69,7 +94,7 @@ class CategoryController extends Controller
     {
         $category   =   Category::where('uuid',$uuid)->firstOrFail();
         $category->delete();
-        Logs::store('Memperbarui kategori '. $category->name);
+        Logs::store('Menghapus kategori '. $category->name);
         Alert::info('Berhasil Menghapus Data.','Terhapus')->autoclose(4500);
         return redirect()->back();
     }

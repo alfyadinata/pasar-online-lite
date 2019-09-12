@@ -7,7 +7,7 @@
                 <th>No Telpon</th>
                 <th>Email</th>
                 <th>Password</th>                
-                <th>Aksi</th> 
+                <th>Aksi</th>
             </tr> 
         </thead> 
         <tbody>

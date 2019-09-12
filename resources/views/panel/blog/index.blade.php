@@ -7,7 +7,7 @@
 <div id="page-wrapper" style="min-height: 335px;">
     <div class="main-page">
         <div class="tables">
-            <h3 class="title1">Kategori</h3>
+            <h3 class="title1">Blog</h3>
             <a href="{{ route('cBlog') }}" class="btn btn-primary">
                 Tambah +
             </a>

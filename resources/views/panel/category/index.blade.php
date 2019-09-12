@@ -26,31 +26,12 @@
                                 </th>
 
                                 <th>Nama</th>
-                                <th>Status</th> 
+                                <th>Type</th> 
                                 <th>Aksi</th> 
                             </tr> 
                         </thead> 
                         <tbody> 
-                            @foreach($categories as $data)
-                            <tr> 
-                                <td>
-                                    <div class="custom-checkbox custom-control">
-                                        <input type="checkbox" name="checked[]" value="{{ $data->uuid }}" class="checks form-control">
-                                        <label for="checkbox-{{ $data->id }}" class="custom-control-label">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->is_product === 1 ? "Produk" : "Blog" }}</td>
-                                <td>
-                                        <a href="{{ route('delCategory',$data->uuid) }}" onclick="return confirm('Yakin Ingin Menghapus Data ?');" class="btn btn-danger">
-                                            Hapus
-                                        </a>
-                                        <a data-href="{{ route('eCategory',$data->uuid) }}" class="openPopupEdit btn btn-primary">
-                                            Edit
-                                        </a>
-                                </td>
-                            </tr>
-                            @endforeach
+
                         </tbody> 
                     </table> 
                 </form>
@@ -102,11 +83,30 @@
 
 @section('js')
 
-<script>
-
-    $(document).ready( function () {
-        $('#datatable').DataTable();
-    } );
+<script type="text/javascript">
+    // alert
+    $(document).on('click', '.delete', function() { 
+        if (!confirm('Yakin Ingin Menghapus Data Ini ?')) {
+            return false;
+        }
+    });
+    // yajra datatable
+    $(document).ready(function(){
+        $(function() {
+            $('#datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route("apiCategory") }}',
+                columns: [
+                    {data: 'checker', name: 'checker', orderable: false, searchable: false},
+                    { data: 'name', name: 'name' },
+                    {data: 'is_product', name: 'is_product', orderable: true, searchable: true},
+                    // { data: 'is_product', name: 'is_product' },
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+        });
+    });
 
     // modal edit
     $(document).on('click', '.openPopupEdit', function() { 
@@ -115,9 +115,9 @@
                 $('#myModalEdit').modal({show:true});
             });
     });
-
-    $(document).ready(function(){	
-        // modal create
+    
+    // modal create
+    $(document).ready(function(){	 
         $('.openPopup').on('click',function(){
             var dataURL = $(this).attr('data-href');
             $('.modal-body').load(dataURL,function(){

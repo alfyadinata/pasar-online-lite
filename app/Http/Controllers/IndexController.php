@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
+use App\Category; 
 use App\Product;
 use App\Store;
 use App\Promotion;
@@ -14,21 +14,32 @@ class IndexController extends Controller
     {
         $products    =   Product::latest()->get();
         $promotions =   Promotion::latest()->get();
-        return view('fe.index',compact('product'));
+        $stores     =   Store::latest()->get();
+        return view('index',compact('products','promotions','stores'));
+    }
+
+    public function showProduct($slug)
+    {
+        $detail    =   Product::where('slug',$slug)->firstOrFail();
+        $detail->visit += 1;
+        $detail->save();
+        // dd($detail);
+        return view('detail-product',compact('detail'));
+    }
+
+    public function showStore($slug)
+    {
+        $detail =   Store::where('slug',$slug)->firstOrFail();
+        
     }
 
     public function search(Request $request)
     {
         $q  =   $request->get('q');
-        $category   =   $request->category;
-                
-        // if ( $category != null) {
-        //     $products   =   Product::where('category_id',$category)->where('name','LIKE','%'.$q.'%')->get();
-        //     return view('fe.product',compact('products','q'));
-        // }else {
-        //     $products   =   Product::where('name','LIKE','%'.$q.'%')->get();
-        //     return view('fe.product',compact('products','q'));
-        // }
+        $products    =   Product::latest()->get();
+        // dd($products);
+
+        return view('product',compact('products'));
     }
 
     public function filter(Request $request)
@@ -45,4 +56,5 @@ class IndexController extends Controller
         $products   =   Product::where('category_id',$category)->get();
         return view('fe.product',compact('products'));
     }
+
 }

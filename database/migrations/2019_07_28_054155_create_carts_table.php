@@ -18,7 +18,8 @@ class CreateCartsTable extends Migration
             $table->uuid('uuid');
             $table->BigInteger('product_id')->unsigned();
             $table->BigInteger('user_id')->unsigned();
-            $table->string('message')->nullable();
+            $table->BigInteger('total')->default(0);
+            $table->text('message')->nullable();
             $table->BigInteger('qty')->default(0);
             $table->integer('status')->default(0);
             $table->timestamps();

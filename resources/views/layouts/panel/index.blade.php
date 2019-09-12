@@ -96,21 +96,21 @@
 				$('#btnDel').hide();
 			}
         });
-
-        $('.checks').click(function() {
-            if ($('.checks:checked').length === $('.checks').length) {
-				$('#checkAll').prop('checked', true);
-				$('#btnDel').show();
-            } else {
-				if ($('.checks:checked').length > 0) {
-					$('#checkAll').prop('checked', false);
-					$('#btnDel').show();
-				}else{
-					$('#btnDel').hide();
-				}
-            }
-        });
     }); 
+	
+	$(document).on('click', '.checks', function() { 
+		if ($('.checks:checked').length === $('.checks').length) {
+			$('#checkAll').prop('checked', true);
+			$('#btnDel').show();
+		} else {
+			if ($('.checks:checked').length > 0) {
+				$('#checkAll').prop('checked', false);
+				$('#btnDel').show();
+			}else{
+				$('#btnDel').hide();
+			}
+		}
+    });
   </script>
   <script src="{{ asset('js/sweetalert/sweetalert.min.js') }}"></script>
   @include('sweet::alert')

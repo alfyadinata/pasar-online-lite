@@ -6,7 +6,7 @@
     </div>
     <div class="form-group"> 
         <label>Status</label> 
-        <select name="status" class="form-control">
+        <select name="is_product" class="form-control">
             <option value="0">Blog</option>
             <option value="1" {{ $edit->is_product == 1 ? "selected" : "" }}>Produk</option>
         </select>

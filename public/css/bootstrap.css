@@ -1057,7 +1057,7 @@ th {
 .glyphicon-subscript:before {
   content: "\e256";
 }
-.glyphicon-menu-left:before {
+.glyphico n-menu-left:before {
   content: "\e257";
 }
 .glyphicon-menu-right:before {
@@ -1101,12 +1101,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: rgb(6, 143, 86);
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #23527c;
+  color: rgb(11, 226, 136);
   text-decoration: underline;
 }
 a:focus {

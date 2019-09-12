@@ -35,28 +35,7 @@
                             </tr> 
                         </thead> 
                         <tbody> 
-                            @foreach($cashiers as $data)
-                            <tr> 
-                                <td>
-                                    <div class="custom-checkbox custom-control">
-                                        <input type="checkbox" name="checked[]" value="{{ $data->uuid }}" class="checks form-control">
-                                        <label for="checkbox-{{ $data->id }}" class="custom-control-label">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ $data->phone_number }}</td>
-                                <td>{{ $data->active == 0 ? "Non-Aktif" : "Aktif" }}</td>
-                                <td>
-                                        <a href="{{ route('delCashier',$data->uuid) }}" onclick="return confirm('Yakin Ingin Menghapus Data ?');" class="btn btn-danger">
-                                            Hapus
-                                        </a>
-                                        <a data-href="{{ route('eCashier',$data->uuid) }}" class="openPopupEdit btn btn-primary">
-                                            Edit
-                                        </a>
-                                </td>
-                            </tr>
-                            @endforeach
+
                         </tbody> 
                     </table> 
                 </form>
@@ -110,9 +89,31 @@
 
 <script>
 
-    $(document).ready( function () {
-        $('#datatable').DataTable();
-    } );
+    // alert
+    $(document).on('click', '.delete', function() { 
+        if (!confirm('Yakin Ingin Menghapus Data Ini ?')) {
+            return false;
+        }
+    });
+
+        // yajra datatable
+    $(document).ready(function(){
+        $(function() {
+            $('#datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route("apiCashier") }}',
+                columns: [
+                    {data: 'checker', name: 'checker', orderable: false, searchable: false},
+                    { data: 'name', name: 'name' },
+                    {data: 'email', name: 'email'},
+                    { data: 'phone_number', name: 'phone_number' },
+                    {data: 'status', name: 'status', searchable: false},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+        });
+    });
 
     // modal edit
     $(document).on('click', '.openPopupEdit', function() { 

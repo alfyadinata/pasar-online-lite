@@ -1635,7 +1635,7 @@ button.note-color-btn {
     display:block;
 }
 .forgot a:hover{
-    color: #e94e02;
+    color: rgb(11, 226, 136);
 }
 .login-page input[type="submit"] {
     border: none;
@@ -1643,14 +1643,14 @@ button.note-color-btn {
     cursor: pointer;
     color: #fff;
     border-radius: 15px;
-    background: #6164C1;
+    background: rgb(11, 226, 136);
     width: 100%;
     padding: .5em 1em;
     font-size: 1em;
     margin: 0.5em 0 0;
 }
 .login-page input[type="submit"]:hover{
-    background: #4F52BA;
+    background: rgb(11, 226, 136);
 }
 .login-page-bottom {
     text-align: center;

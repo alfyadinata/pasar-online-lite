@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->uuid('uuid');
             $table->BigInteger('cart_id')->unsigned();
+            $table->text('message')->nullable();
             $table->BigInteger('payment_method')->default(0);
             $table->BigInteger('store_id')->unsigned();
             $table->string('invoice');
@@ -25,7 +26,7 @@ class CreateTransactionsTable extends Migration
             $table->BigInteger('total')->default(0);
             $table->integer('status')->default(0);
             $table->text('receiver_address');
-            $table->BigInteger('shipping_costs');
+            $table->BigInteger('shipping_costs')->default(0);
 
             $table->timestamps();
             $table->softDeletes();

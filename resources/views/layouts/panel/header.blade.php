@@ -167,8 +167,10 @@
 								<div class="profile_img">	
 									<span class="prfil-img"><img src="{{ asset('images/a.png')}}" alt=""> </span> 
 									<div class="user-name">
-										<p>Wikolia</p>
-										<span>Administrator</span>
+										<p>
+											{{ auth()->user()->name }}
+										</p>
+										<span>{{ auth()->user()->role->name }}</span>
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
 									<i class="fa fa-angle-up lnr"></i>
