@@ -8,7 +8,7 @@
     <div class="main-page">
         <div class="tables">
             <h3 class="title1">Blog</h3>
-            <a href="{{ route('cBlog') }}" class="btn btn-primary">
+            <a href="{{ route('cBlog') }}" class="btn btn-primary"> 
                 Tambah +
             </a>
             <div class="table-responsive bs-example widget-shadow">
@@ -29,32 +29,12 @@
 
                                 <th>Judul</th>
                                 <th>Kategori</th>
-                                <th>Tanggal Di Buat</th> 
+                                <th>Author</th> 
                                 <th>Aksi</th> 
                             </tr> 
                         </thead> 
                         <tbody> 
-                            @foreach($blogs as $data)
-                            <tr> 
-                                <td>
-                                    <div class="custom-checkbox custom-control">
-                                        <input type="checkbox" name="checked[]" value="{{ $data->uuid }}" class="checks form-control">
-                                        <label for="checkbox-{{ $data->id }}" class="custom-control-label">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>{{ $data->title }}</td>
-                                <td>{{ $data->category->name }}</td>
-                                <td>{{ $data->created_at->format('d-m-Y') }}</td>
-                                <td>
-                                        <a href="{{ route('delCategory',$data->uuid) }}" onclick="return confirm('Yakin Ingin Menghapus Data ?');" class="btn btn-danger">
-                                            Hapus
-                                        </a>
-                                        <a data-href="{{ route('eCategory',$data->uuid) }}" class="openPopupEdit btn btn-primary">
-                                            Edit
-                                        </a>
-                                </td>
-                            </tr>
-                            @endforeach
+
                         </tbody> 
                     </table> 
                 </form>
@@ -108,9 +88,23 @@
 
 <script>
 
-    $(document).ready( function () {
-        $('#datatable').DataTable();
-    } );
+        // yajra datatable
+        $(document).ready(function(){
+            $(function() {
+                $('#datatable   ').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: '{{ route("apiBlog") }}',
+                    columns: [
+                        {data: 'checker', name: 'checker', orderable: false, searchable: false},
+                        { data: 'title', name: 'title' },
+                        {data: 'category', name: 'category'},
+                        {data: 'author', name: 'author'},
+                        {data: 'action', name: 'action', orderable: false, searchable: false},
+                    ]
+                });
+            });
+        });
 
     // modal edit
     $(document).on('click', '.openPopupEdit', function() { 
