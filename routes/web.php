@@ -2,7 +2,7 @@
 
 
 Route::get('/generate', function() {
-    \App\Role::create([
+\App\Role::create([
         'name' => 'Super Admin'
     ]);
     \App\User::create([
@@ -13,6 +13,8 @@ Route::get('/generate', function() {
         'active' => 1
     ]);
 });
+
+Route::get('/logout', function(){ return abort(404); });
 
 Route::get('/','IndexController@index');
 // Route::get('/', function() {
@@ -79,6 +81,8 @@ Route::prefix('panel')->group(function () {
     });
     // superadmin route
     Route::group(['middleware' => ['auth']], function () {
+        // dashboard
+        Route::get('/dashboard','DashboardController@index')->name('iDashboard');
         // category
         Route::get('api/category','CategoryController@api')->name('apiCategory');
         Route::get('category','CategoryController@index')->name('iCategory');
