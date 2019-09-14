@@ -5,7 +5,7 @@
 				@if(auth()->check())
 					@if(auth()->user()->role_id == 1)
 						<li>
-							<a href="index.html"><i class="fa fa-home nav_icon"></i>Dashboard</a>
+							<a href="{{ route('iDashboard') }}"><i class="fa fa-home nav_icon"></i>Dashboard</a>
 						</li>
 						<li>
 							<a href="#"><i class="fa fa-cogs nav_icon"></i>Post<span class="fa arrow"></span></a>
