@@ -91,7 +91,7 @@
         // yajra datatable
         $(document).ready(function(){
             $(function() {
-                $('#datatable   ').DataTable({
+                $('#datatable').DataTable({
                     processing: true,
                     serverSide: true,
                     ajax: '{{ route("apiBlog") }}',

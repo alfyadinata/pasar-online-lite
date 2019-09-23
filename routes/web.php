@@ -93,9 +93,12 @@ Route::prefix('panel')->group(function () {
         Route::get('category/delete/{uuid}','CategoryController@destroy')->name('delCategory');
         Route::delete('category/delete-many','CategoryController@destroyMany')->name('delManyCategory');
         // blog
+        Route::get('api/blog','BlogController@api')->name('apiBlog');
         Route::get('blog','BlogController@index')->name('iBlog');
         Route::get('blog/create','BlogController@create')->name('cBlog');
         Route::post('blog/create','BlogController@store');
+        Route::get('blog/edit/{uuid}','BlogController@edit')->name('eBlog');
+        Route::get('blog/delete/{uuid}','BlogController@destroy')->name('delBlog');
         // cashier
         Route::get('api/cashier','CashierController@api')->name('apiCashier');
         Route::get('cashier','CashierController@index')->name('iCashier');

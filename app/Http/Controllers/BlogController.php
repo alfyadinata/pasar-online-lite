@@ -7,6 +7,7 @@ use App\helpers\Visitor;
 use App\helpers\Logs;
 use App\Blog;
 use App\Category;
+use DataTables;
 use Alert;
 
 class BlogController extends Controller
@@ -16,10 +17,36 @@ class BlogController extends Controller
         Visitor::create();
     }
 
-    public function index()
+    public function api()
     {
         $blogs  =   Blog::latest()->get();
-        // dd($)
+        return DataTables::of($blogs)->addIndexColumn()
+        ->addColumn('checker', function($row) {
+            $checker = '<div class="custom-checkbox custom-control">
+                            <input type="checkbox" name="checked[]" value="'. $row->uuid.'" class="checks form-control">
+                            <label for="checkbox-'.$row->uuid.'" class="custom-control-label">&nbsp;</label>
+                        </div>';
+            return $checker;
+        } )
+        ->addColumn('category', function($row) {
+            $category   =   $row->category->name;
+            return $category;
+        } )
+        ->addColumn('author', function($row) {
+            $author =   $row->user->name;
+            return $author;
+        } )
+        ->addColumn('action', function($row) {
+            $btn    =   '<a href="'.route("eBlog",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
+                            '<a href="'.route("delBlog",$row->uuid).'" class="delete btn btn-danger">
+                            Hapus
+                        </a>';
+            return $btn;
+        } )->rawColumns(['checker','category','author','action'])->make(true);        
+    }
+
+    public function index()
+    {
         return view('panel.blog.index',compact('blogs'));
     }
 
@@ -39,10 +66,10 @@ class BlogController extends Controller
         }
         
         $request['user_id'] =   auth()->user()->id;
-        $request['slug']    =   str_slug($request->name);
+        $request['slug']    =   str_slug($request->title);
         try {
             Blog::create($request->all());
-            Logs::store('Membuat blog : '.$request->name);
+            Logs::store('Membuat blog : '.$request->title);
             Alert::success('Berhasil Membuat Data.','Sukses')->autoclose(4500);
             return redirect()->route('iBlog');                
         } catch (\Throwable $e) {
@@ -64,5 +91,31 @@ class BlogController extends Controller
         $blog->update([
             
         ]);
+    }
+
+    public function destroy($uuid)
+    {
+        $category   =   Category::where('uuid',$uuid)->firstOrFail();
+        $category->delete();
+        Logs::store('Menghapus kategori '. $category->name);
+        Alert::info('Berhasil Menghapus Data.','Terhapus')->autoclose(4500);
+        return redirect()->back();
+    }
+
+    public function destroyMany(Request $request)
+    {
+        if ($request->checked == null) {
+            Alert::error('Ada Kesalahan.','Gagal')->autoclose(4500);
+            return redirect()->back();
+        }
+
+        foreach ($request->checked as $key => $value) {
+            $data   =   Category::where('uuid',$request->checked[$key])->firstOrFail();
+            $data->delete();
+            Logs::store('Menghapus kategori '. $data->name);
+        }
+
+        Alert::info('Data Terpilih Berhasil Di Hapus.','Sukses')->autoclose(4500);
+        return redirect()->back();
     }
 }
