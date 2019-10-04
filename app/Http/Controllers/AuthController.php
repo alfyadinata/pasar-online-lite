@@ -58,7 +58,7 @@ class AuthController extends Controller
                     return redirect('/');
                 } elseif ($check->role_id < 5 && $check->role_id != 4) {
                     alert()->message('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);
-                    return redirect('/panel/category');
+                    return redirect('/panel/dashboard');
                 } else {
                     alert()->error('Ada Kesalahan','Gagal !')->autoclose(4500);
                     return redirect()->back()->withInput();
@@ -88,14 +88,7 @@ class AuthController extends Controller
         try {
             $request['slug']    =   str_slug($request->name.'-'.time());
             $request['user_id'] =   auth()->user()->id;
-            // $data   =   Store::create([
-            //     'name'  =>  $request->name,
-            //     'slug'  =>  str_slug($request->name).'-'.time(),
-            //     'address'   =>  $request->address,
-            //     'phone_number'  =>  $request->phone_number,
-            //     'user_id'   =>  auth()->user()->id
-            // ]);
-            
+            $request['name']    =   $request->store;
             if ($store->create($request->all())) {
                 $user   =   User::where('id',auth()->user()->id)->first();
                 $user->update([
@@ -106,7 +99,7 @@ class AuthController extends Controller
                 return redirect('/');
             }
         } catch (\Throwable $th) {
-            alert()->error('Ada Kesalahan.','Gagal !')->autoclose(4500);
+            alert()->error('Ada Kesalahan. '.$th,'Gagal !')->autoclose(4500);
             return redirect()->back()->withInput();
         }
     }
