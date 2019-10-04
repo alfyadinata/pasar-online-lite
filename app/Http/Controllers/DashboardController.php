@@ -25,7 +25,7 @@ class DashboardController extends Controller
             $product    =   Product::count();
         }
         if ($user->role_id == 3) {
-            $storeId    =   Store::where('user_id',$user->id)->count();
+            $storeId    =   Store::where('user_id',$user->id)->first();
             $product    =   Product::where('store_id',$storeId->id)->count();
             $transaction    =   Transaction::where('store_id',$storeId->id)->count();
         }
