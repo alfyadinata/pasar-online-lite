@@ -1,12 +1,15 @@
+@php 
+	$config	=	\App\Config::first();
+@endphp
 
 <div class="top_bar">
     <div class="container">
         <div class="row">
             <div class="col d-flex flex-row">
-                <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('fe/images/phone.png')}}" alt=""></div>+38 068 005 3570</div>
-                <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('fe/images/mail.png')}}" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+                <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('fe/images/phone.png')}}" alt=""></div>{{ $config->phone_number }}</div>
+                <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('fe/images/mail.png')}}" alt=""></div><a href="mailto:{{ $config->email }}">{{ $config->email }}</a></div>
                 <div class="top_bar_content ml-auto">
-                    <div class="top_bar_menu">
+                    <!-- <div class="top_bar_menu">
                         <ul class="standard_dropdown top_bar_dropdown">
                             <li>
                                 <a href="#">English<i class="fas fa-chevron-down"></i></a>
@@ -25,7 +28,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="top_bar_user">
                         @if(auth()->check())
                         <form action="{{ route('logout') }}" method="post">
@@ -53,7 +56,7 @@
             <!-- Logo -->
             <div class="col-lg-2 col-sm-3 col-3 order-1">
                 <div class="logo_container">
-                    <div class="logo"><a href="#"><img src="{{ asset('logo.png') }}" alt="" style="width:45%;"></a></div>
+                    <div class="logo"><a href="{{ url('/') }}"><img src="{{ asset('logo.png') }}" alt="" style="width:45%;"></a></div>
                 </div>
             </div>
 
@@ -68,6 +71,14 @@
                                     <div class="custom_dropdown_list">
                                         <span class="custom_dropdown_placeholder clc">All Categories</span>
                                         <i class="fas fa-chevron-down"></i>
+                                        <ul class="custom_list clc">
+                                            <li><a class="clc" href="#">All Categories</a></li>
+                                            <li><a class="clc" href="#">Computers</a></li>
+                                            <li><a class="clc" href="#">Laptops</a></li>
+                                            <li><a class="clc" href="#">Cameras</a></li>
+                                            <li><a class="clc" href="#">Hardware</a></li>
+                                            <li><a class="clc" href="#">Smartphones</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <button type="submit" class="header_search_button trans_300" value="Submit"><img src="{{ asset('fe/images/search.png')}}" alt=""></button>
