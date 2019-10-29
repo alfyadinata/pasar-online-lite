@@ -26,7 +26,7 @@
                             <!-- Blog post -->
                             <div class="blog_post">
                                 <div class="blog_image" style="background-image:url({{ asset('images/'.$data->thumbnail) }})"></div>
-                                <div class="blog_text">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada.</div>
+                                <div class="blog_text">{{ $data->title }}</div>
                                 <div class="blog_button"><a href="{{ route('showBlog',$data->slug) }}">Continue Reading</a></div>
                             </div>
                         @endforeach

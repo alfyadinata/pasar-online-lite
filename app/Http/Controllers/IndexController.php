@@ -47,10 +47,12 @@ class IndexController extends Controller
     public function search(Request $request)
     {
         $q  =   $request->get('q');
-        $products    =   Product::latest()->get();
-        // dd($products);
-
-        return view('product',compact('products'));
+        // dd($q);
+        $search    =   Product::where('name','like', '%'.$q.'%')->paginate(15);
+        $total      =   Product::where('name','like', '%'.$q.'%')->count();
+        $categories =   Category::where('is_product',1)->get();
+        // dd($search);
+        return view('search',compact('search','total','categories'));
     }
 
     public function filter(Request $request)
