@@ -13,7 +13,7 @@
 		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
 		<div class="home_overlay"></div>
 		<div class="home_content d-flex flex-column align-items-center justify-content-center">
-			<h2 class="home_title">Smartphones & Tablets</h2>
+			<h2 class="home_title">Hasil Pencarian untuk "{{ $q }}"</h2>
 		</div>
 	</div>
 
@@ -77,7 +77,7 @@
 
 					<div class="shop_content">
 						<div class="shop_bar clearfix">
-							<div class="shop_product_count"><span>{{ $total }}</span> products found</div>
+							<div class="shop_product_count"><span>{{ $total }}</span> Produk Ditemukan</div>
 							<div class="shop_sorting">
 								<span>Sort by:</span>
 								<ul>
@@ -97,18 +97,14 @@
 							<div class="product_grid_border"></div>
                                 @foreach($search as $data)
                                     <!-- Product Item -->
-                                    <div class="product_item is_new">
+                                    <div class="product_item">
                                         <div class="product_border"></div>
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset('images/'.$data->foto) }}" alt=""></div>
                                         <div class="product_content">
                                             <div class="product_price">Rp. {{ number_format($data->price,0,'',',') }}.00</div>
-                                            <div class="product_name"><div><a href="#" tabindex="0">{{ $data->name }}</a></div></div>
+                                            <div class="product_name"><div><a href="{{ route('showProduct',$data->slug) }}" tabindex="0">{{ $data->name }}</a></div></div>
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
                                     </div>
                                 @endforeach
 
