@@ -9,6 +9,7 @@ use Uuid;
 class Promotion extends Model
 {
     use SoftDeletes;
+    protected $fillable =   ['uuid','product_id','user_id','start','finish','message'];
     // uuid 
     protected static function boot()
     {
