@@ -22,6 +22,9 @@ Route::get('/','IndexController@index');
 Route::get('/blogs','IndexController@blogs');
 // detail blog
 Route::get('blog/{slug}','IndexController@showBlog')->name('showBlog');
+// detail store
+Route::get('store/{slug}','IndexController@showStore')->name('showStore');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('login','AuthController@login')->name('postLogin');
 Route::post('register','AuthController@register')->name('register');
