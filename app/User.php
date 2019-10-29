@@ -92,4 +92,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Blog::class);
     }
+
+    public function saldo()
+    {
+        return $this->belongsTo(Saldo::class);
+    }
+    
 }

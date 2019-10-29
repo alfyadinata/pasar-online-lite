@@ -28,12 +28,13 @@ class BlogController extends Controller
                         </div>';
             return $checker;
         } )
-        ->addColumn('category', function($row) {
-            $category   =   $row->category->name;
-            return $category;
-        } )
+        // ->addColumn('category', function($row) {
+        //     $category   =   $row->category->name;
+        //     return $category;
+        // } )
         ->addColumn('author', function($row) {
-            $author =   $row->user->name;
+            // $author =   $row->user->name;
+            $author = 'nannaa';
             return $author;
         } )
         ->addColumn('action', function($row) {
@@ -67,6 +68,7 @@ class BlogController extends Controller
         
         $request['user_id'] =   auth()->user()->id;
         $request['slug']    =   str_slug($request->title);
+        $request['thumbnail']   =   $request->file('thumbnail')->store('blogs');
         try {
             Blog::create($request->all());
             Logs::store('Membuat blog : '.$request->title);

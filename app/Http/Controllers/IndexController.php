@@ -7,6 +7,8 @@ use App\Category;
 use App\Product;
 use App\Store;
 use App\Promotion;
+use App\LastSeen;
+use App\Blog;
 
 class IndexController extends Controller
 {
@@ -22,6 +24,15 @@ class IndexController extends Controller
     {
         $detail    =   Product::where('slug',$slug)->firstOrFail();
         $detail->visit += 1;
+
+        // last seen
+        if (auth()->check()) {
+            LastSeen::create([
+                'user_id' => auth()->user()->id,
+                'product_id' => $detail->id
+            ]);
+        }
+
         $detail->save();
         // dd($detail);
         return view('detail-product',compact('detail'));
@@ -55,6 +66,38 @@ class IndexController extends Controller
         $category   =   $request->category;
         $products   =   Product::where('category_id',$category)->get();
         return view('fe.product',compact('products'));
+    }
+
+    // wish list
+    public function wishlist(Request $request)
+    {
+        WishList::create([
+            'product_id' => $request->product_id,
+            'user_id' => auth()->user()->id
+        ]);
+
+        return response()->json([
+            'status' => 'ok',
+            'message' => 'berhasil menambah wishlist'
+        ]);
+    }
+
+    // delete wish list
+    public function destroyWishList($uuid)
+    {
+        WishList::where('user_id',auth()->user()->id)->where('uuid',$uuid)->delete();
+      
+        return response()->json([
+            'status' => 'ok',
+            'message' => 'berhasil menghapus wishlist'
+        ]);
+    }
+
+    // list blogs
+    public function blogs()
+    {
+        $blogs  =   Blog::latest()->paginate(1);
+        return view('blogs',compact('blogs'));
     }
 
 }

@@ -8,6 +8,9 @@ use App\helpers\Visitor;
 use App\helpers\Logs;
 use Alert;
 use DataTables;
+use App\Exports\CategoriesExport;
+use App\Imports\CategoriesImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
@@ -114,5 +117,22 @@ class CategoryController extends Controller
 
         Alert::info('Data Terpilih Berhasil Di Hapus.','Sukses')->autoclose(4500);
         return redirect()->back();
+    }
+
+    public function import() 
+    {
+        try {
+            Excel::import(new CategoriesImport,request()->file('file'));
+            Alert::success('Berhasil Import Data.','Sukses')->autoclose(4500);
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Alert::error('Gagal Import Data.','Oops')->autoclose(4500);
+            return redirect()->back();
+        }
+    }
+
+    public function export() 
+    {
+        return Excel::download(new CategoriesExport, 'categories.xlsx');
     }
 }

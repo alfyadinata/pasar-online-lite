@@ -17,6 +17,8 @@ Route::get('/generate', function() {
 Route::get('/logout', function(){ return abort(404); });
 
 Route::get('/','IndexController@index');
+// list blogs
+Route::get('/blogs','IndexController@blogs');
 // Route::get('/', function() {
 //     return view('layouts.fe.index');
 // });
@@ -92,6 +94,8 @@ Route::prefix('panel')->group(function () {
         Route::post('category/edit/{uuid}','CategoryController@update')->name('uCategory');
         Route::get('category/delete/{uuid}','CategoryController@destroy')->name('delCategory');
         Route::delete('category/delete-many','CategoryController@destroyMany')->name('delManyCategory');
+        Route::post('category/import','CategoryController@import')->name('importCategory');
+        Route::get('category/export','CategoryController@export')->name('exportCategory');
         // blog
         Route::get('api/blog','BlogController@api')->name('apiBlog');
         Route::get('blog','BlogController@index')->name('iBlog');

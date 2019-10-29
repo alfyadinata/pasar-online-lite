@@ -11,11 +11,13 @@ use Alert;
 
 class CartUserController extends Controller
 {
+    // status 0 = di keranjang
+    // status 1 = di transaksi
     public function index()
     {
-        $userId     =   User::where('id',auth()->user()->id)->first();
-        $carts      =   Cart::where('user_id',$userId->id)->where('status',0)->get();
-        $products   =   Product::where($carts);
+        $carts      =   Cart::where('user_id',auth()->user()->id )->where('status',0)->get();
+        // dd($carts);
+        // $products   =   Product::where($carts);
         $admins     =   User::where('role_id',2)->where('active',1)->get();
         $total      =   Cart::sum('total');
 
@@ -24,19 +26,19 @@ class CartUserController extends Controller
 
     public function store(Request $request)
     {
-        $check  =   Cart::where('product_id',$request->product_id)->where('user_id',auth()->user()->id)->first();
+        $check  =   Cart::where('product_id',$request->product_id)->where('user_id',auth()->user()->id)->where('status',0)->first();
         $product    =   Product::where('id',$request->product_id)->first();
         $cart   =   new Cart;
         $request['user_id'] =   auth()->user()->id;
-        // dd($request->all());
+        
         if ($check != null) {
             if ($check->qty + $request->qty > $product->qty) {
                 Alert::error('Stock Terbatas.','Oops')->autoclose(4500);
                 return redirect()->back();
             }
-            // dd($check->id);
+
             $productAvailable   =   Product::where('id',$check->product_id)->first();
-            // dd($productAvailable);
+
             $check->update([
                 'qty' => $check->qty + $request->qty,
                 'total' => $check->total + $request->qty * $productAvailable->price,
@@ -62,8 +64,8 @@ class CartUserController extends Controller
     public function destroy($uuid)
     {
         $cart   =   Cart::where('uuid',$uuid)->firstOrFail();
-        $cart->delete();
         Logs::store('Menghapus Keranjang, cart id = '.$check->id);
+        $cart->delete();
         Alert::info('Berhasil Menghapus Dari Keranjang.','Sukses')->autoclose(4500);
         return redirect()->back();
     }

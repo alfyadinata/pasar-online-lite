@@ -13,14 +13,25 @@ use Auth;
 
 class TransactionController extends Controller
 {
+    // ==> transaction status <==
+    // status 0 =  menunggu respon penjual
+    // status 1 =  di acc penjual
+    // status 3 =  sedang di proses oleh adminstrator
+    // status 4 = barang sedang di kirim
+    // status 5 = pesanan sudah sampai 
+    // status 6 = dibatalkan penjual
+    // status 7 = dibatalkan pembeli
+    // ==> payment method <==
+    // 0    = bayar di tempat   
     public function api()
     {
         $admin  =   Auth()->User();
         $store  =   Store::where('user_id',$admin->id)->first();
         
+        // just for superadmin
         $transactionAll =   Transaction::latest()->get();
+        // just for cashir
         $transaction    =   Transaction::where('admin_id',$admin->id)->orderBy('id','DESC')->get();
-        $transactionSeller  =   Transaction::where('store_id',$store->id)->first();
 
         if ($admin->role_id == 1) {
             return DataTables::of($transactionAll)->addIndexColumn()
@@ -54,6 +65,7 @@ class TransactionController extends Controller
                 return $btn;
             })->rawColumns(['action','customer','status','checker'])->make(true);
         }
+        // cashier
         if ($admin->role_id == 2) {
             return DataTables::of($transaction)->addIndexColumn()
             ->addColumn('checker', function($row) {
@@ -75,19 +87,21 @@ class TransactionController extends Controller
                 if ($row->status == 1) {
                     $status =   'Sedang Di Proses Oleh Penjual';
                 }
-                return $status;
+                return $status; 
             })
             ->addColumn('action', function($row) {
-                $btn    =   '<a data-href="'.route("eTransaction",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
-                            '<a data-href="'.route("showTransaction",$row->uuid).'" class="openPopupShow btn btn-warning">Detail</a> || '.
+                $btn    ='<a data-href="'.route("eTransaction",$row->uuid).'" class="openPopupEdit btn btn-warning">Detail</a> || '.
                                 '<a href="'.route("delTransaction",$row->uuid).'" class="delete btn btn-danger">
                                 Hapus
                             </a>';
                 return $btn;
             })->rawColumns(['action','customer','status','checker'])->make(true);
         }
+        //  seller
         if ($admin->role_id == 3) {
-            return DataTables::of($transactionAll)->addIndexColumn()
+            // just for seller
+            $transactionSeller  =   Transaction::where('store_id',$store->id)->where('status',0)->orderBy('id','DESC')->get();
+            return DataTables::of($transactionSeller)->addIndexColumn()
             ->addColumn('checker', function($row) {
                 $checker = '<div class="custom-checkbox custom-control">
                                 <input type="checkbox" name="checked[]" value="'. $row->uuid.'" class="checks form-control">
@@ -110,11 +124,9 @@ class TransactionController extends Controller
                 return $status;
             })
             ->addColumn('action', function($row) {
-                $btn    =   '<a data-href="'.route("eTransaction",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
-                            '<a data-href="'.route("showTransaction",$row->uuid).'" class="openPopupShow btn btn-warning">Detail</a> || '.
-                                '<a href="'.route("delTransaction",$row->uuid).'" class="delete btn btn-danger">
-                                Hapus
-                            </a>';
+                $btn    =  '<a data-href="'.route("eTransaction",$row->uuid).'" class="openPopupEdit btn btn-warning">Detail</a> || '.
+                            '<a href="" class="delete btn btn-info">Proses</a> || '.
+                            '<a href="" class="btn btn-danger"> Tolak </a>'    ;
                 return $btn;
             })->rawColumns(['action','customer','status','checker'])->make(true);
         }

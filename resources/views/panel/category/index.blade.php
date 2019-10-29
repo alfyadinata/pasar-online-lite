@@ -10,6 +10,13 @@
                 Tambah +
             </a>
             <div class="table-responsive bs-example widget-shadow">
+            <form action="{{ route('importCategory') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" class="form-control" accept=".xlsx">
+                <br>
+                <button class="btn btn-success">Import User Data</button>
+                <a class="btn btn-warning" href="{{ route('exportCategory') }}">Export User Data</a>
+            </form>
                 <h4>Data :</h4>
                 <form action="{{ route('delManyCategory') }}" onsubmit="return confirm('Yakin Ingin Menghapus Data Terpilih ?');" method="post">
                     @csrf 
