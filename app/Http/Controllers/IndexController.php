@@ -41,18 +41,27 @@ class IndexController extends Controller
     public function showStore($slug)
     {
         $detail =   Store::where('slug',$slug)->firstOrFail();
+        $products   =   Product::where('store_id',$detail->id)->latest()->paginate(15);
+        return view('show-store',compact('detail','products'));
         
     }
 
     public function search(Request $request)
     {
         $q  =   $request->get('q');
-        // dd($q);
-        $search    =   Product::where('name','like', '%'.$q.'%')->paginate(15);
+        $search =   [];
+
+        $search    =   Product::where('name','like', '%'.$q.'%')->orderBy('id','DESC')->paginate(3);
+        if ($search == "") {
+            $search =   Store::where('name','like', '%'.$q.'%')->orderBy('id','DESC')->paginate(3);
+        }
+        // dd($search);
+
+
         $total      =   Product::where('name','like', '%'.$q.'%')->count();
         $categories =   Category::where('is_product',1)->get();
         // dd($search);
-        return view('search',compact('search','total','categories'));
+        return view('search',compact('search','total','categories','q'));
     }
 
     public function filter(Request $request)
