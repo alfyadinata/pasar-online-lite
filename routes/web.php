@@ -13,17 +13,15 @@ Route::get('/generate', function() {
         'active' => 1
     ]);
 });
+Auth::routes();
 
 Route::get('/logout', function(){ return abort(404); });
 
 Route::get('/','IndexController@index');
 // list blogs
 Route::get('/blogs','IndexController@blogs');
-// Route::get('/', function() {
-//     return view('layouts.fe.index');
-// });
-Auth::routes();
-
+// detail blog
+Route::get('blog/{slug}','IndexController@showBlog')->name('showBlog');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('login','AuthController@login')->name('postLogin');
 Route::post('register','AuthController@register')->name('register');
@@ -103,6 +101,7 @@ Route::prefix('panel')->group(function () {
         Route::post('blog/create','BlogController@store');
         Route::get('blog/edit/{uuid}','BlogController@edit')->name('eBlog');
         Route::get('blog/delete/{uuid}','BlogController@destroy')->name('delBlog');
+        Route::delete('blog/delete-many','BlogController@destroyMany')->name('delManyBlog');
         // cashier
         Route::get('api/cashier','CashierController@api')->name('apiCashier');
         Route::get('cashier','CashierController@index')->name('iCashier');

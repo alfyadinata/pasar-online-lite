@@ -13,7 +13,7 @@
             </a>
             <div class="table-responsive bs-example widget-shadow">
                 <h4>Data :</h4>
-                <form action="{{ route('delManyCategory') }}" onsubmit="return confirm('Yakin Ingin Menghapus Data Terpilih ?');" method="post">
+                <form action="{{ route('delManyBlog') }}" onsubmit="return confirm('Yakin Ingin Menghapus Data Terpilih ?');" method="post">
                     @csrf 
                     @method('delete')
                     <button id="btnDel" class="btn btn-danger" style="display:none;">Hapus Terpilih</button>

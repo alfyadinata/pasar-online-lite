@@ -96,8 +96,15 @@ class IndexController extends Controller
     // list blogs
     public function blogs()
     {
-        $blogs  =   Blog::latest()->paginate(1);
+        $blogs  =   Blog::latest()->paginate(9);
         return view('blogs',compact('blogs'));
+    }
+
+    // detail blog
+    public function showBlog($slug)
+    {
+        $detail =   Blog::where('slug',$slug)->firstOrFail();
+        return view('detail-blog',compact('detail'));
     }
 
 }

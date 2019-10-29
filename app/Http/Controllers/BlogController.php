@@ -65,12 +65,16 @@ class BlogController extends Controller
             Alert::error('Ada Data Yang Sama.','Gagal')->autoclose(4500);
             return redirect()->back(); 
         }
-        
-        $request['user_id'] =   auth()->user()->id;
-        $request['slug']    =   str_slug($request->title);
-        $request['thumbnail']   =   $request->file('thumbnail')->store('blogs');
+
         try {
-            Blog::create($request->all());
+            $blog   =   new Blog;
+            $blog->title    =   $request->title;
+            $blog->slug     =   str_slug($request->title);
+            $blog->user_id  =   auth()->user()->id;
+            $blog->description  =   $request->description;
+            $blog->category_id  =   $request->category_id;
+            $blog->thumbnail    =   $request->file('thumbnail')->store('blogs');
+            $blog->save();
             Logs::store('Membuat blog : '.$request->title);
             Alert::success('Berhasil Membuat Data.','Sukses')->autoclose(4500);
             return redirect()->route('iBlog');                

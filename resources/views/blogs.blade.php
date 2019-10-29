@@ -11,7 +11,7 @@
 		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
 		<div class="home_overlay"></div>
 		<div class="home_content d-flex flex-column align-items-center justify-content-center">
-			<h2 class="home_title">Technological Blog</h2>
+			<h2 class="home_title">Blogs</h2>
 		</div>
 	</div>
 
@@ -27,7 +27,7 @@
                             <div class="blog_post">
                                 <div class="blog_image" style="background-image:url({{ asset('images/'.$data->thumbnail) }})"></div>
                                 <div class="blog_text">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada.</div>
-                                <div class="blog_button"><a href="blog_single.html">Continue Reading</a></div>
+                                <div class="blog_button"><a href="{{ route('showBlog',$data->slug) }}">Continue Reading</a></div>
                             </div>
                         @endforeach
 					</div>
