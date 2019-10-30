@@ -107,7 +107,6 @@ class IndexController extends Controller
     // list blogs
     public function blogs()
     {
-        dd(auth()->check());
         $blogs  =   Blog::latest()->paginate(9);
         return view('blogs',compact('blogs'));
     }
