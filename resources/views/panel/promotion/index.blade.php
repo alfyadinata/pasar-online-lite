@@ -6,9 +6,9 @@
     <div class="main-page">
         <div class="tables">
             <h3 class="title1">Promotion</h3>
-            <a href="javascript:void(0);" data-href="{{ route('cCategory') }}" class="openPopup btn btn-primary">
-                Tambah +
-            </a>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Tambah Promosi
+            </button>
             <div class="table-responsive bs-example widget-shadow">
                 <h4>Data :</h4>
                 <form action="{{ route('delManyCategory') }}" onsubmit="return confirm('Yakin Ingin Menghapus Data Terpilih ?');" method="post">
@@ -25,32 +25,14 @@
                                     </div>
                                 </th>
 
-                                <th>Nama</th>
-                                <th>Status</th> 
+                                <th>Nama Produk</th>
+                                <th>Mulai</th>
+                                <th>Selesai</th> 
                                 <th>Aksi</th> 
                             </tr> 
                         </thead> 
                         <tbody> 
-                            @foreach($promotions as $data)
-                            <tr> 
-                                <td>
-                                    <div class="custom-checkbox custom-control">
-                                        <input type="checkbox" name="checked[]" value="{{ $data->uuid }}" class="checks form-control">
-                                        <label for="checkbox-{{ $data->id }}" class="custom-control-label">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->is_product === 1 ? "Produk" : "Blog" }}</td>
-                                <td>
-                                        <a href="{{ route('delCategory',$data->uuid) }}" onclick="return confirm('Yakin Ingin Menghapus Data ?');" class="btn btn-danger">
-                                            Hapus
-                                        </a>
-                                        <a data-href="{{ route('eCategory',$data->uuid) }}" class="openPopupEdit btn btn-primary">
-                                            Edit
-                                        </a>
-                                </td>
-                            </tr>
-                            @endforeach
+
                         </tbody> 
                     </table> 
                 </form>
@@ -59,54 +41,64 @@
     </div>
 </div>
 
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Buat</h4>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Buat Promosi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+            @csrf
+            <div class="form-group">
+                <label>Uri Product</label>
+                <input type="text" name="slug" class="form-control">
             </div>
-            <div class="modal-body">
-      
+            <div class="form-group">
+                <label>Notes</label>
+                <textarea name="message" rows="3" class="form-control"></textarea>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-      
+            <center>
+                <button class="btn btn-primary">Submit</button>
+            </center>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 
-<div class="modal fade" id="myModalEdit" role="dialog">
-    <div class="modal-dialog">
-    
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit</h4>
-            </div>
-            <div class="modal-body">
-      
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-      
-    </div>
-</div>
 @stop
+
+
 
 @section('js')
 
 <script>
 
-    $(document).ready( function () {
-        $('#datatable').DataTable();
-    } );
+    // yajra datatable
+    $(document).ready(function(){
+        $(function() {
+            $('#datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route("apiPromotion") }}',
+                columns: [
+                    {data: 'checker', name: 'checker', orderable: false, searchable: false},
+                    { data: 'product', name: 'product' },
+                    {data: 'start', name: 'start' },
+                    { data: 'finish', name: 'finish' },
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+        });
+    });
 
     // modal edit
     $(document).on('click', '.openPopupEdit', function() { 
@@ -116,14 +108,5 @@
             });
     });
 
-    $(document).ready(function(){	
-        // modal create
-        $('.openPopup').on('click',function(){
-            var dataURL = $(this).attr('data-href');
-            $('.modal-body').load(dataURL,function(){
-                $('#myModal').modal({show:true});
-            });
-        }); 
-    });
 </script>   
 @stop

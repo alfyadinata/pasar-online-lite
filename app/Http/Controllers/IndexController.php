@@ -52,9 +52,9 @@ class IndexController extends Controller
         $search =   [];
 
         $search    =   Product::where('name','like', '%'.$q.'%')->orderBy('id','DESC')->paginate(3);
-        if ($search == "") {
-            $search =   Store::where('name','like', '%'.$q.'%')->orderBy('id','DESC')->paginate(3);
-        }
+        // if ($search == "") {
+        //     $search =   Store::where('name','like', '%'.$q.'%')->orderBy('id','DESC')->paginate(3);
+        // }
         // dd($search);
 
 

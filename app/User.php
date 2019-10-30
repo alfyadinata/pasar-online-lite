@@ -68,11 +68,6 @@ class User extends Authenticatable
         return $this->hasMany(Log::class);
     }
 
-    public function store()
-    {
-        return $this->hasOne(Store::class);
-    }
-
     public function promotion()
     {
         return $this->hasMany(Promotion::class);

@@ -8,7 +8,7 @@
                         <div class="new_arrivals_title"> Terbaru </div>
                         <ul class="clearfix">
                             <li class="active">Produk</li>
-                            <li>Audio &amp; Video</li>
+                            <!-- <li>Audio &amp; Video</li> -->
                         </ul>
                         <div class="tabs_line"><span style="left: 674.087px; width: 72.05px;"></span></div>
                     </div>
@@ -34,7 +34,7 @@
                                                         <input type="radio" name="product_color" style="background:#000000">
                                                         <input type="radio" name="product_color" style="background:#999999">
                                                     </div>
-                                                    <button class="product_cart_button">Add to Cart</button>
+                                                    <a href="{{ route('showProduct',$data->slug) }}" class="btn btn-primary">Detail</a>
                                                 </div>
                                             </div>
                                             <div class="product_fav"><i class="fas fa-heart"></i></div>

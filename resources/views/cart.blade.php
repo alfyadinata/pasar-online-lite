@@ -29,6 +29,7 @@
                                                     <th style="width:25%;">Produk</th>
                                                     <th style="width:25%;">Harga</th>
                                                     <th style="width:10%;">QTY</th>
+                                                    <th style="width:10%;">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -45,6 +46,12 @@
                                                     <td>{{ $row->name }}</td>
                                                     <td>Rp. {{ number_format($row->price,0 * $data->qty,'',',') }} .00</td>
                                                     <td>{{ $data->qty }}</td>
+                                                    <td>
+                                                        <form action="" method="post">
+                                                            <!-- <button class="btn btn-warning">Edit</button> -->
+                                                            <button class="btn btn-sm btn-danger">X</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                                 @endif
                                             @endforeach

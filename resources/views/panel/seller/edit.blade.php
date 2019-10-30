@@ -5,6 +5,11 @@
         <input name="name" type="text" value="{{ $edit->name }}" class="form-control" placeholder="Nama"> 
     </div>
 
+    <div class="form-group">
+        <label>Lini Toko</label>
+        <input type="text" readonly value="{{ $edit->store->name }}" class="form-control">
+    </div>
+
     <div class="form-group"> 
         <label>No Telpon </label> 
         <input name="phone_number" type="text" value="{{ $edit->phone_number }}" class="form-control" placeholder="No Telpon"> 

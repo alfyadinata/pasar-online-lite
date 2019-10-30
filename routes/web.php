@@ -140,6 +140,8 @@ Route::prefix('panel')->group(function () {
         Route::delete('transaction/delete-many','ProductController@destroyMany')->name('delManyTransaction');
         // promotion
         Route::get('promotion','PromotionController@index')->name('iPromotion');
+        Route::post('promotion','PromotionController@store');
+        Route::get('api/promotion','PromotionController@api')->name('apiPromotion');
         // web config
         Route::get('config','ConfigController@index')->name('iConfig');
         Route::post('config','ConfigController@update');
