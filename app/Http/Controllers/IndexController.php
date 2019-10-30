@@ -107,6 +107,7 @@ class IndexController extends Controller
     // list blogs
     public function blogs()
     {
+        dd(auth()->check());
         $blogs  =   Blog::latest()->paginate(9);
         return view('blogs',compact('blogs'));
     }
@@ -117,5 +118,12 @@ class IndexController extends Controller
         $detail =   Blog::where('slug',$slug)->firstOrFail();
         return view('detail-blog',compact('detail'));
     }
-
+    
+    // product by category
+    public function filterByCategory($slug)
+    {
+        $category   =   Category::where('slug',$slug)->firstOrFail();
+        $products   =   Product::where('category_id',$category->id)->paginate(15);
+        return view('search',compact(''));
+    }
 }

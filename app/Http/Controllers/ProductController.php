@@ -24,6 +24,7 @@ class ProductController extends Controller
         $user   =   User::where('id',auth()->user()->id)->first();
         $store  =   Store::where('user_id',$user->id)->first();
         // dd($store);
+        // get khusus seller
         if (auth()->user()->role_id == 3) {
             $products   =   Product::where('store_id',$store->id)->get();
             return DataTables::of($products)->addIndexColumn()
@@ -60,8 +61,8 @@ class ProductController extends Controller
                 return $price;
             })
             ->addColumn('action', function($row) {
-                $btn    =   '<a data-href="'.route("eCategory",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
-                                '<a href="'.route("delCategory",$row->uuid).'" class="delete btn btn-danger">
+                $btn    =   '<a href="'.route("eProduct",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
+                                '<a href="'.route("delProduct",$row->uuid).'" class="delete btn btn-danger">
                                 Hapus
                             </a>';
                 return $btn;
