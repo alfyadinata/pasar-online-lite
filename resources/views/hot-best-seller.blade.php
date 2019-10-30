@@ -25,7 +25,7 @@
                                     <!-- <div class="bestsellers_image"><img src="images/best_6.png" alt=""></div> -->
                                     <div class="bestsellers_content">
                                         <div class="bestsellers_category"><a href="{{ route('showStore',$data->uuid) }}">{{ $data->name }}</a></div>
-                                        <div class="bestsellers_name"><a href="product.html">Huawei MediaPad T3</a></div>
+                                        <div class="bestsellers_name"><a href="product.html">{{ $data->name }}</a></div>
                                         <div class="rating_r rating_r_4 bestsellers_rating"><i></i><i></i><i></i><i></i><i></i></div>
                                         <div class="bestsellers_price discount">$225<span>$300</span></div>
                                     </div>
