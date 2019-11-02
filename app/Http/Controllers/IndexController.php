@@ -14,8 +14,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $products    =   Product::latest()->get();
-        $promotions =   Promotion::latest()->get();
+        $products    =   Product::latest()->Limit(20)->get();
+        // $promotions =   Promotion::latest()->get();
         $stores     =   Store::latest()->get();
         return view('index',compact('products','promotions','stores'));
     }
@@ -51,7 +51,7 @@ class IndexController extends Controller
         $q  =   $request->get('q');
         $search =   [];
 
-        $search    =   Product::where('name','like', '%'.$q.'%')->orderBy('id','DESC')->paginate(3);
+        $search    =   Product::where('name','like', '%'.$q.'%')->orderBy('id','DESC')->paginate(15);
         // if ($search == "") {
         //     $search =   Store::where('name','like', '%'.$q.'%')->orderBy('id','DESC')->paginate(3);
         // }
@@ -121,8 +121,11 @@ class IndexController extends Controller
     // product by category
     public function filterByCategory($slug)
     {
-        $category   =   Category::where('slug',$slug)->firstOrFail();
-        $products   =   Product::where('category_id',$category->id)->paginate(15);
-        return view('search',compact(''));
+        $q   =   Category::where('slug',$slug)->firstOrFail();
+        $search   =   Product::where('category_id',$q->id)->paginate(15);
+        $total   =   Product::where('category_id',$q->id)->count();
+        $categories =   Category::where('is_product',1)->get();
+        $q  =   $q->name;
+        return view('search',compact('search','q','total','categories'));
     }
 }
