@@ -88,7 +88,7 @@ class CashierController extends Controller
         $cashier->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $password == null ? $cashier->password : $password,
+            'password' => bcrypt($password == null ? $cashier->password : $password),
             'phone_number' => $request->phone_number,
             'active' => $request->active
         ]);

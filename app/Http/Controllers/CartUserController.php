@@ -19,9 +19,9 @@ class CartUserController extends Controller
         // dd($carts);
         // $products   =   Product::where($carts);
         $admins     =   User::where('role_id',2)->where('active',1)->get();
-        $total      =   Cart::sum('total');
+        $total      =   Cart::where('user_id',auth()->user()->id)->sum('total');
 
-        return view('cart',compact('carts','products','admins'));
+        return view('cart',compact('carts','total','admins'));
     }
 
     public function store(Request $request)
