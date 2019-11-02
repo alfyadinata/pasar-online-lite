@@ -48,6 +48,7 @@ Route::group(['middleware' => ['customer']], function () {
     // cart
     Route::get('cart','CartUserController@index')->name('cart');
     Route::post('cart','CartUserController@store')->name('postCart');
+    Route::get('cart/{uuid}','CartUserController@destroy')->name('delCart');
     // transaction
     Route::post('transaction','TransactionUserController@store')->name('userTransaction');
 });

@@ -49,7 +49,7 @@
 								<span>Sortir :</span>
 								<ul>
 									<li>
-										<span class="sorting_text">highest rated<i class="fas fa-chevron-down"></span></i>
+										<span class="sorting_text">default<i class="fas fa-chevron-down"></span></i>
 										<ul>
 											<!-- <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li> -->
 											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>name</li>

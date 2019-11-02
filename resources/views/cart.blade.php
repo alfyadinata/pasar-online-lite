@@ -96,14 +96,15 @@
                                 </div>
                                 <div class="order_total_content text-md-right">
                                     <div class="order_total_title">Order Total:</div>
-                                    <div class="order_total_amount">$2000</div>
+                                    <input type="file" accept="image/*;capture=camera" capture="camera"> 
+                                    <div class="order_total_amount">Rp. {{ number_format($total,0,'',',') }}</div>
                                 </div>
                             </div>
 
                             <div class="cart_buttons">
                                 <!-- <button type="button" class="button cart_button_clear"></button> -->
-                                <a href="" class="button cart_button_clear">Add to Cart</a>
-                                <button class="button cart_button_checkout">Beli Sekarang</button>
+                                <!-- <a href="" class="button cart_button_clear">Beli Sekarang</a> -->
+                                <button class="button cart_button_clear">Beli Sekarang</button>
                             </div>
                         </div>
                     </form>
