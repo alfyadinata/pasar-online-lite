@@ -23,7 +23,12 @@ class PromotionController extends Controller
             return $checker;
         } )
         ->addColumn('product', function($row) {
-            $product = $row->product->name;
+             $product = "Beta Test"; 
+            // $p  =   \App\Product::where('id',$row->product_id)->first();
+            // dd($p);
+            // $product0    =   \App\Product::where('id',$row)->first();
+            // $product    =   $p->name == null ? 'Ha' : $p->name;
+            // dd($product);
             return $product;
         } )
         ->addColumn('start', function($row) {
@@ -43,7 +48,7 @@ class PromotionController extends Controller
         })->addColumn('status', function($row) {
             $checker = $row->active == 1 ? 'Aktif' : 'Non-Aktif';
             return $checker;
-        } )->rawColumns(['action','status','checker'])->make(true);
+        } )->rawColumns(['action','status','product','checker'])->make(true);
     }
     public function index()
     {
