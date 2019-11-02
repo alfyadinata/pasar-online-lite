@@ -92,7 +92,8 @@ class AuthController extends Controller
             if ($store->create($request->all())) {
                 $user   =   User::where('id',auth()->user()->id)->first();
                 $user->update([
-                    'role_id' => 3
+                    'role_id' => 3,
+                    'active' => 0
                 ]);
                 Auth::logout();
                 Alert::info('Berhasil Membuat Toko. Silahkan Contact Admin','Sukses')->autoclose(4500);
