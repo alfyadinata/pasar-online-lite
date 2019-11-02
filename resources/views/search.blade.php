@@ -13,7 +13,7 @@
 		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
 		<div class="home_overlay"></div>
 		<div class="home_content d-flex flex-column align-items-center justify-content-center">
-			<h2 class="home_title">Hasil Pencarian untuk "{{ $q }}"</h2>
+			<h2 class="home_title">Hasil untuk "{{ $q }}"</h2>
 		</div>
 	</div>
 
@@ -30,41 +30,8 @@
 							<div class="sidebar_title">Kategori</div>
 							<ul class="sidebar_categories">
                                 @foreach($categories as $data)
-    								<li><a href="#">{{ $data->name }}</a></li>
+    								<li><a href="{{ route('filterByCategory',$data->slug) }}">{{ $data->name }}</a></li>
                                 @endforeach
-							</ul>
-						</div>
-						<div class="sidebar_section filter_by_section">
-							<div class="sidebar_title">Filter By</div>
-							<div class="sidebar_subtitle">Price</div>
-							<div class="filter_price">
-								<div id="slider-range" class="slider_range"></div>
-								<p>Range: </p>
-								<p><input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;"></p>
-							</div>
-						</div>
-						<div class="sidebar_section">
-							<div class="sidebar_subtitle color_subtitle">Color</div>
-							<ul class="colors_list">
-								<li class="color"><a href="#" style="background: #b19c83;"></a></li>
-								<li class="color"><a href="#" style="background: #000000;"></a></li>
-								<li class="color"><a href="#" style="background: #999999;"></a></li>
-								<li class="color"><a href="#" style="background: #0e8ce4;"></a></li>
-								<li class="color"><a href="#" style="background: #df3b3b;"></a></li>
-								<li class="color"><a href="#" style="background: #ffffff; border: solid 1px #e1e1e1;"></a></li>
-							</ul>
-						</div>
-						<div class="sidebar_section">
-							<div class="sidebar_subtitle brands_subtitle">Brands</div>
-							<ul class="brands_list">
-								<li class="brand"><a href="#">Apple</a></li>
-								<li class="brand"><a href="#">Beoplay</a></li>
-								<li class="brand"><a href="#">Google</a></li>
-								<li class="brand"><a href="#">Meizu</a></li>
-								<li class="brand"><a href="#">OnePlus</a></li>
-								<li class="brand"><a href="#">Samsung</a></li>
-								<li class="brand"><a href="#">Sony</a></li>
-								<li class="brand"><a href="#">Xiaomi</a></li>
 							</ul>
 						</div>
 					</div>
@@ -79,12 +46,12 @@
 						<div class="shop_bar clearfix">
 							<div class="shop_product_count"><span>{{ $total }}</span> Produk Ditemukan</div>
 							<div class="shop_sorting">
-								<span>Sort by:</span>
+								<span>Sortir :</span>
 								<ul>
 									<li>
 										<span class="sorting_text">highest rated<i class="fas fa-chevron-down"></span></i>
 										<ul>
-											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li>
+											<!-- <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li> -->
 											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>name</li>
 											<li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>price</li>
 										</ul>
@@ -99,9 +66,9 @@
                                     <!-- Product Item -->
                                     <div class="product_item">
                                         <div class="product_border"></div>
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset('images/'.$data->foto) }}" alt=""></div>
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"style="padding:4px;"><img src="{{ asset('images/'.$data->foto) }}" alt=""></div>
                                         <div class="product_content">
-                                            <div class="product_price">Rp. {{ number_format($data->price,0,'',',') }}.00</div>
+                                            <div class="product_price">{{ number_format($data->price,0,'',',') }}.00</div>
                                             <div class="product_name"><div><a href="{{ route('showProduct',$data->slug) }}" tabindex="0">{{ $data->name }}</a></div></div>
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>

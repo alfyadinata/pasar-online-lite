@@ -24,9 +24,9 @@
                                     <div class="arrivals_slider_item">
                                         <div class="border_active"></div>
                                         <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset('images/'.$data->foto) }}" alt=""></div>
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center" style="padding: 5px; width:150px;"><img src="{{ asset('images/'.$data->foto) }}" alt=""></div>
                                             <div class="product_content">
-                                                <div class="product_price">Rp. {{ number_format($data->price,0,'',',') }}.00</div>
+                                                <div class="product_price"style="">Rp. {{ number_format($data->price,0,'',',') }}.00</div>
                                                 <div class="product_name"><div><a href="{{ route('showProduct',$data->slug) }}">{{ $data->name }}</a></div></div>
                                                 <div class="product_extras">
                                                     <div class="product_color">

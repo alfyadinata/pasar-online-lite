@@ -1,7 +1,7 @@
 @php 
-	$promo	=	\App\Promotion::latest()->first();
+	$promo	=	App\Promotion::latest()->first();
 @endphp
-<form action="{{ route('postCart') }}" method="post">
+<form action="{{ route('postCart') }}" onsubmit="return confirm('Masukan Ke Cart ? ?');" method="post">
 	@csrf 
 	<input name="qty" type="hidden" value="1">
 	<input name="product_id" type="hidden" value="{{ $promo->product->id }}">

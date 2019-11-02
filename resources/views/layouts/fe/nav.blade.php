@@ -15,7 +15,7 @@
 
 						<ul class="cat_menu">
 							@foreach(\App\Category::where('is_product',1)->latest()->Limit(6)->get() as $data)
-								<li><a href="#">{{ $data->name }} <i class="fas fa-chevron-right"></i></a></li>
+								<li><a href="{{ route('filterByCategory',$data->slug) }}">{{ $data->name }}</a></li>
 							@endforeach
 						</ul>
 					</div>

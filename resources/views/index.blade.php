@@ -17,7 +17,6 @@
     @include('hot-best-seller')
 @stop
 
-
 @section('js')
 <script src="{{ asset('fe/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
 <script src="{{ asset('fe/plugins/easing/easing.js')}}"></script>

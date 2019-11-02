@@ -21,7 +21,7 @@
                         <div class="forgot-grid">
                             <div class="clearfix"> </div>
                         </div>
-                        <a href="signup.html">Sign Up</a>
+                        <a href="{{ url('login') }}">Sign In</a>
                     </form>
                 </div>
             </div>

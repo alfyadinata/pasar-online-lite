@@ -18,7 +18,7 @@
                             <label class="checkbox"><input type="checkbox" name="checkbox" ><i></i>Remember me</label>
                             <div class="forgot">
                                 <a href="#">Forgot password? </a> 
-                                <a href="signup.html">Sign Up</a>
+                                <a href="{{ url('register') }}">Sign Up</a>
                             </div>
                         </div>
                             <div class="clearfix"> </div>

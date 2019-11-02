@@ -1,7 +1,11 @@
+@php 
+	$config	=	\App\Config::first();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>PasLine</title>
+<title>{{ $config->app_name }}</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="OneTech shop project">
@@ -42,10 +46,10 @@
 				<div class="col-lg-3 footer_col">
 					<div class="footer_column footer_contact">
 						<div class="logo_container">
-							<div class="logo"><a href="#">OneTech</a></div>
+							<div class="logo"><a href="#">{{ $config->app_name }}</a></div>
 						</div>
-						<div class="footer_title">Got Question? Call Us 24/7</div>
-						<div class="footer_phone">+38 068 005 3570</div>
+						<div class="footer_title">Ada Masalah ? WhatsApp kami :</div>
+						<div class="footer_phone"><a href="https://wa.me/{{ $config->phone_number }}">{{ $config->phone_number }}</a></div>
 						<div class="footer_contact_text">
 							<p>17 Princess Road, London</p>
 							<p>Grester London NW18JR, UK</p>
@@ -64,29 +68,11 @@
 
 				<div class="col-lg-2 offset-lg-2">
 					<div class="footer_column">
-						<div class="footer_title">Find it Fast</div>
+						<div class="footer_title">Hot News</div>
 						<ul class="footer_list">
-							<li><a href="#">Computers & Laptops</a></li>
-							<li><a href="#">Cameras & Photos</a></li>
-							<li><a href="#">Hardware</a></li>
-							<li><a href="#">Smartphones & Tablets</a></li>
-							<li><a href="#">TV & Audio</a></li>
-						</ul>
-						<div class="footer_subtitle">Gadgets</div>
-						<ul class="footer_list">
-							<li><a href="#">Car Electronics</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="col-lg-2">
-					<div class="footer_column">
-						<ul class="footer_list footer_list_2">
-							<li><a href="#">Video Games & Consoles</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">Cameras & Photos</a></li>
-							<li><a href="#">Hardware</a></li>
-							<li><a href="#">Computers & Laptops</a></li>
+							@foreach(\App\Blog::latest()->Limit(5)->get() as $data)
+								<li><a href="">{{ $data->title }}</a></li>
+							@endforeach
 						</ul>
 					</div>
 				</div>

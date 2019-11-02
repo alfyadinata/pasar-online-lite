@@ -47,10 +47,7 @@
                                                     <td>Rp. {{ number_format($row->price,0 * $data->qty,'',',') }} .00</td>
                                                     <td>{{ $data->qty }}</td>
                                                     <td>
-                                                        <form action="" method="post">
-                                                            <!-- <button class="btn btn-warning">Edit</button> -->
-                                                            <button class="btn btn-sm btn-danger">X</button>
-                                                        </form>
+                                                        <a href="" onclick="return confirm('Yakin Menghapus ini dari keranjang ?');" class="btn btn-sm btn-danger">X</a>
                                                     </td>
                                                 </tr>
                                                 @endif

@@ -5,7 +5,7 @@
 				@if(auth()->check())
 					@if(auth()->user()->role_id == 1)
 						<li>
-							<a href="{{ route('iDashboard') }}"><i class="fa fa-home nav_icon"></i>Dashboard</a>
+							<a href="{{ route('iDashboard') }}"><i class="fa fa-tachometer nav_icon"></i>Dashboard</a>
 						</li>
 						<li>
 							<a href="#"><i class="fa fa-cogs nav_icon"></i>Post<span class="fa arrow"></span></a>
@@ -58,6 +58,9 @@
 							<a href="{{ route('iPromotion') }}"><i class="fa fa-check-square-o nav_icon"></i>Promotion</a>
 						</li>
 						<li>
+							<a href="{{ route('logs') }}"><i class="fa fa-table nav_icon"></i>Logs</a>
+						</li>
+						<li>
 							<a href="{{ route('iConfig') }}"><i class="fa fa-check-square-o nav_icon"></i>App Configuration</a>
 						</li>
 					@endif
@@ -85,7 +88,7 @@
 					@endif
 					@if(auth()->user()->role_id == 3)
 						<li>
-							<a href="index.html"><i class="fa fa-home nav_icon"></i>Dashboard</a>
+							<a href="index.html"><i class="fa fa-tachometer nav_icon"></i>Dashboard</a>
 						</li>
 						<li>
 							<a href="{{ route('iProduct') }}"> <i class="fa fa-book nav_icon"></i>Product</a>

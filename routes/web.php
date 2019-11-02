@@ -13,6 +13,7 @@ Route::get('/generate', function() {
         'active' => 1
     ]);
 });
+
 Auth::routes();
 
 Route::get('/logout', function(){ return abort(404); });
@@ -24,7 +25,8 @@ Route::get('/blogs','IndexController@blogs');
 Route::get('blog/{slug}','IndexController@showBlog')->name('showBlog');
 // detail store
 Route::get('store/{slug}','IndexController@showStore')->name('showStore');
-
+// filter by category
+Route::get('category/{slug}','IndexController@filterByCategory')->name('filterByCategory');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('login','AuthController@login')->name('postLogin');
 Route::post('register','AuthController@register')->name('register');
@@ -114,6 +116,9 @@ Route::prefix('panel')->group(function () {
         Route::post('cashier/edit/{uuid}','CashierController@update')->name('uCashier');
         Route::get('cashier/delete/{uuid}','CashierController@destroy')->name('delCashier');    
         Route::delete('cashier/delete-many','CashierController@destroyMany')->name('delManyCashier');
+        // logs
+        Route::get('api/logs','LogController@api')->name('apiLogs');
+        Route::get('logs','LogController@index')->name('logs');
         // seller
         Route::get('api/seller','SellerController@api')->name('apiSeller');
         Route::get('seller','SellerController@index')->name('iSeller');
