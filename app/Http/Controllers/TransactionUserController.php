@@ -10,6 +10,7 @@ use App\helpers\Logs;
 use App\Transaction;
 use App\Product;
 use App\Cart;
+use App\Saldo;
 use Alert;
 use Uuid;
 use DataTables;
@@ -35,7 +36,7 @@ class TransactionUserController extends Controller
     {
         $transaction    =   new Transaction;
         try {
-           // database transaction
+        //    database transaction
             DB::beginTransaction();
             foreach ($request->cart_id as $key => $value) {
                 // generate invoice, validate user
@@ -48,8 +49,18 @@ class TransactionUserController extends Controller
                 // generate store id 
                 $cart    =   Cart::where('user_id',$userId)->where('id',$request->cart_id[$key])->where('status',0)->first();
                 $product    =   Product::where('id',$cart->product_id)->first();
-                // dd($product->id);
-                // processing insert transaction
+                // check saldo
+                $saldo  =   Saldo::where('user_id',$userId)->first();
+                // dd($saldo);
+                if ($saldo->saldo < $cart->total) {
+                    Alert::info('Saldo Tidak Cukup.','Gagal')->autoclose(4500);
+                    return redirect()->back();                    
+                }
+                // kurangi saldo user
+                $saldo->update([
+                    'saldo' => $saldo->saldo - $cart->total
+                ]);
+                Logs::store('Saldo di kurangi : '.number_format($cart->total,0,'',','));                
                 $transaction->create([
                     'product_id' => $product->id,
                     'user_id' => $userId,
