@@ -189,6 +189,14 @@ class TransactionController extends Controller
         $transaction->update([
             'status'    =>  5
         ]);
+        $message    =   'Hi '.$transaction->user->name.','.'Pesanan kamu dengan invoice:'.
+        $transaction->invoice.' Telah Di Batalkan. #PasarOnline';
+        if(auth()->user()->role_id == 3) {
+            $message    =   'Hi '.$transaction->user->name.','.'Pesanan kamu dengan invoice:'.
+            $transaction->invoice.' Telah Di Batalkan Penjual. #PasarOnline';
+        }
+
+        SMS::send([$transaction->user->phone_number], $message);
         Logs::store('Menolak transaksi, id transaksi='. $transaction->id);
         Alert::info('Transaksi Di Tolak.','Sukses')->autoclose(4500);
         return redirect()->back();
