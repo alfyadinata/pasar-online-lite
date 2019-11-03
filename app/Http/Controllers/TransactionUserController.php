@@ -18,7 +18,7 @@ class TransactionUserController extends Controller
 {
     // ==> transaction status <==
     // status 0 =  waiting response seller
-    // status 1 = in proses by seller
+    // status 1 = in proses by admin
     // status 3 = in delivery
     // status 4 = complete
     // status 5 = cancel by seller
@@ -47,9 +47,10 @@ class TransactionUserController extends Controller
                 // generate store id 
                 $cart    =   Cart::where('user_id',$userId)->where('id',$request->cart_id[$key])->where('status',0)->first();
                 $product    =   Product::where('id',$cart->product_id)->first();
+                // dd($product->id);
                 // processing insert transaction
                 $transaction->create([
-                    'cart_id' => $request->cart_id[$key],
+                    'product_id' => $product->id,
                     'user_id' => $userId,
                     'payment_method' => $request->payment_method,
                     'admin_id'  => $request->admin_id,

@@ -16,7 +16,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('uuid');
-            $table->BigInteger('cart_id')->unsigned();
+            $table->BigInteger('product_id')->unsigned();
             $table->text('message')->nullable();
             $table->BigInteger('payment_method')->default(0);
             $table->BigInteger('store_id')->unsigned();
@@ -31,7 +31,7 @@ class CreateTransactionsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');        
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');        
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

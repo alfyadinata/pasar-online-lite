@@ -9,7 +9,7 @@ use Uuid;
 class Product extends Model
 {
     use SoftDeletes;
-    protected $fillable =   ['name','slug','price','description','category_id','qty','foto','foto_2','foto_3','store_id'];
+    protected $fillable =   ['name','slug','price','unit_id','description','category_id','qty','foto','foto_2','foto_3','store_id'];
     // uuid 
     protected static function boot()
     {
@@ -38,9 +38,9 @@ class Product extends Model
         return $this->belongsToMany(WishList::class);
     }
     
-    public function cart()
+    public function transaction()
     {
-        return $this->belongsToMany(Cart::class);
+        return $this->belongsToMany(Transaction::class);
     }   
 
     public function promotion()

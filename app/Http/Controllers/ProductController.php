@@ -7,6 +7,7 @@ use App\Product;
 use App\Store;
 use App\Category;
 use App\User;
+use App\Unit;
 use App\helpers\Visitor;
 use App\helpers\Logs;
 use Alert;
@@ -72,22 +73,14 @@ class ProductController extends Controller
 
     public function index()
     {
-        // $user   =   User::where('id',auth()->user()->id)->first();
-        // $store  =   Store::where('user_id',$user->id)->first();
-        // dd($store);
-        // if (auth()->user()->role_id != 3) {
-            // $products   =   Product::all();
-            // return view('panel.product.index',compact('products'));           
-        // }else {
-            // $products   =   Product::where('store_id',$store->id)->get();
-            return view('panel.product.index');
-        // }
+        return view('panel.product.index');
     }
 
     public function create()
     {
         $categories =   Category::where('is_product',1)->get();
-        return view('panel.product.create',compact('categories'));
+        $units   =   Unit::orderBy('name','ASC')->get();
+        return view('panel.product.create',compact('categories','units'));
     }
 
     public function store(Request $request)
@@ -105,6 +98,7 @@ class ProductController extends Controller
                 'description'   =>  $request->description,
                 'slug'  => str_slug($request->name).'-'.time(),
                 'category_id'   =>  $request->category_id,
+                'unit_id'   =>  $request->unit_id,
                 'price' => $request->price,
                 'store_id'  =>  $store->id,
                 'qty' => $request->qty,
@@ -125,7 +119,8 @@ class ProductController extends Controller
     {
         $edit   =   Product::where('uuid',$uuid)->firstOrFail();
         $categories =   Category::where('is_product',1)->get();
-        return view('panel.product.edit',compact('edit','categories'));
+        $units  =   Unit::orderBy('name','ASC')->get();
+        return view('panel.product.edit',compact('edit','units','categories'));
     }
 
     public function update(Request $request,$uuid)
@@ -140,6 +135,7 @@ class ProductController extends Controller
                 'description'   =>  $request->description,
                 'slug'  => str_slug($request->name).'-'.time(),
                 'category_id'   =>  $request->category_id,
+                'unit_id'   =>  $request->unit_id,
                 'price' => $request->price,
                 'qty' => $request->qty,
                 'foto' => $foto,

@@ -9,7 +9,7 @@ use Uuid;
 class Transaction extends Model
 {
     use SoftDeletes;
-    protected $fillable =   ['uuid','cart_id',	'payment_method',	'store_id',	'invoice',	'user_id',
+    protected $fillable =   ['uuid','product_id',	'payment_method',	'store_id',	'invoice',	'user_id',
                         	'admin_id',	'total',	'status',	'receiver_address',	',shipping_costs'];
     // uuid 
     protected static function boot()
@@ -34,8 +34,8 @@ class Transaction extends Model
         return $this->belongsTo(User::class, 'admin_id');
     }
 
-    public function cart()
+    public function product()
     {
-        return $this->belongsToMany(Cart::class);
+        return $this->belongsToMany(Product::class);
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Transaction;
 use App\Product;
 use App\Cart;
+use App\helpers\Logs;
 use App\Store;
 use DataTables;
 use Alert;
@@ -31,7 +32,7 @@ class TransactionController extends Controller
         // just for superadmin
         $transactionAll =   Transaction::latest()->get();
         // just for cashir
-        $transaction    =   Transaction::where('admin_id',$admin->id)->orderBy('id','DESC')->get();
+        $transaction    =   Transaction::where('admin_id',$admin->id)->where('status',1)->orderBy('id','DESC')->get();
 
         if ($admin->role_id == 1) {
             return DataTables::of($transactionAll)->addIndexColumn()
@@ -125,8 +126,8 @@ class TransactionController extends Controller
             })
             ->addColumn('action', function($row) {
                 $btn    =  '<a data-href="'.route("eTransaction",$row->uuid).'" class="openPopupEdit btn btn-warning">Detail</a> || '.
-                            '<a href="" class="delete btn btn-info">Proses</a> || '.
-                            '<a href="" class="btn btn-danger"> Tolak </a>'    ;
+                            '<a href="'.route("acceptTransaction",$row->uuid).'" class="accept btn btn-info">Proses</a> || '.
+                            '<a href="'.route("declineTransaction",$row->uuid).'" class="decline btn btn-danger"> Tolak </a>'    ;
                 return $btn;
             })->rawColumns(['action','customer','status','checker'])->make(true);
         }
@@ -181,4 +182,25 @@ class TransactionController extends Controller
         return redirect()->back();
     }
 
+    public function decline($uuid)
+    {
+        $transaction    =   Transaction::where('uuid',$uuid)->firstOrFail();
+        $transaction->update([
+            'status'    =>  6
+        ]);
+        Logs::store('Menolak transaksi, id transaksi='. $transaction->id);
+        Alert::info('Transaksi Di Tolak.','Sukses')->autoclose(4500);
+        return redirect()->back();
+    }
+
+    public function accept($uuid)
+    {
+        $transaction    =   Transaction::where('uuid',$uuid)->firstOrFail();
+        $transaction->update([
+            'status'    =>  1
+        ]);
+        Logs::store('Menerima transaksi, id transaksi='. $transaction->id);
+        Alert::info('Transaksi Di Terima.','Sukses')->autoclose(4500);
+        return redirect()->back();
+    }
 }

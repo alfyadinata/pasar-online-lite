@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->uuid('uuid');
             $table->string('name');
             $table->BigInteger('category_id')->unsigned();
+            $table->BigInteger('unit_id')->unsigned();
             $table->string('slug');
             $table->text('description');
             $table->BigInteger('qty');
@@ -31,6 +32,7 @@ class CreateProductsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('unit_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
