@@ -40,9 +40,9 @@ class TransactionController extends Controller
         $store  =   Store::where('user_id',$admin->id)->first();
         
         // just for superadmin
-        $transactionAll =   Transaction::latest()->get();
+        $transactionAll =   Transaction::where('status','>',0)->where('status','<',5)->latest()->get();
         // just for cashir
-        $transaction    =   Transaction::where('admin_id',$admin->id)->where('status','>',0)->where('status','<',6)->orderBy('id','DESC')->get();
+        $transaction    =   Transaction::where('admin_id',$admin->id)->where('status','>',0)->where('status','<',5)->orderBy('id','DESC')->get();
 
         if ($admin->role_id == 1) {
             return DataTables::of($transactionAll)->addIndexColumn()
