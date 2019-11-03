@@ -16,8 +16,10 @@ class DashboardController extends Controller
     public function __construct()
     {
         Visit::create();
-        if (auth()->user()->role_id == 4) {
-            return redirect('/');
+        if (auth()->check()) {
+            if (auth()->user()->role_id == 4) {
+                return redirect('/');
+            }
         }
     }
     

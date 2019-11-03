@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Saldo;
 use App\User;
 use Alert;
+use Auth;
 use App\helpers\Logs;
 use App\helpers\Visitor;
 
@@ -14,8 +15,10 @@ class TopUpController extends Controller
     public function __construct()
     {
         Visitor::create();
-        if (auth()->user()->role_id == 4) {
-            return redirect('/');
+        if (auth()->check()) {
+            if (Auth::user()->role_id == 4) {
+                return redirect('/');
+            }
         }
     }
     
