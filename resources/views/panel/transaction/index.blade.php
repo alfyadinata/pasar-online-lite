@@ -7,10 +7,7 @@
 <div id="page-wrapper" style="min-height: 335px;">
     <div class="main-page">
         <div class="tables">
-            <h3 class="title1">Kasir</h3>
-            <a data-href="{{ route('cCashier') }}" class="openPopup btn btn-primary">
-                Tambah +
-            </a>
+            <h3 class="title1">Transaksi Berlangsung</h3>
             <div class="table-responsive bs-example widget-shadow">
                 <h4>Data :</h4>
                 <form action="{{ route('delManyCashier') }}" onsubmit="return confirm('Yakin Ingin Menghapus Data Terpilih ?');" method="post">
@@ -87,7 +84,18 @@
 @section('js')
 
 <script>
-
+    // alert decline
+    $(document).on('click', '.decline', function() { 
+        if (!confirm('Tolak Transaksi Ini ?')) {
+            return false;
+        }
+    });
+    // alert accept
+    $(document).on('click', '.accept', function() { 
+        if (!confirm('Terima Transaksi Ini ?')) {
+            return false;
+        }
+    });
     // alert
     $(document).on('click', '.delete', function() { 
         if (!confirm('Yakin Ingin Menghapus Data Ini ?')) {

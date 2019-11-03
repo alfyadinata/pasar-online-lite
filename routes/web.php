@@ -72,6 +72,8 @@ Route::prefix('panel')->group(function () {
         Route::get('transaction/edit/{uuid}','TransactionController@edit')->name('eTransaction');
         Route::post('transaction/edit/{uuid}','TransactionController@update')->name('uTransaction');
         Route::delete('transaction/delete-many','ProductController@destroyMany')->name('delManyTransaction');
+        Route::get('transaction/{uuid}/accept','TransactionController@accept')->name('acceptTransaction');
+        Route::get('transaction/{uuid}/decline','TransactionController@decline')->name('declineTransaction');
         // store configuration
         Route::get('store-setting','StoreController@index')->name('iSettingStore');
     });

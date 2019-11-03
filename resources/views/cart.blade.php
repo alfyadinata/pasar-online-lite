@@ -27,7 +27,7 @@
                                                     <th>checkAll</th>
                                                     <th style="width:40%;">Foto</th>
                                                     <th style="width:25%;">Produk</th>
-                                                    <th style="width:25%;">Harga</th>
+                                                    <th style="width:25%;">Harga Satuan</th>
                                                     <th style="width:10%;">QTY</th>
                                                     <th style="width:10%;">Aksi</th>
                                                 </tr>
@@ -72,7 +72,10 @@
                                                 <label> Admin Transaksi</label>
                                                 <select name="admin_id" id="" class="form-control">
                                                     @foreach($admins as $data)
-                                                    <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                                        @php 
+                                                            $counter    =   \App\Transaction::where('status',1)->count();
+                                                        @endphp
+                                                    <option value="{{ $data->id }}">{{ $data->name }}({{ $counter}} Transaksi)</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -96,7 +99,6 @@
                                 </div>
                                 <div class="order_total_content text-md-right">
                                     <div class="order_total_title">Order Total:</div>
-                                    <input type="file" accept="image/*;capture=camera" capture="camera"> 
                                     <div class="order_total_amount">Rp. {{ number_format($total,0,'',',') }}</div>
                                 </div>
                             </div>

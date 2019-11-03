@@ -46,6 +46,19 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label>Satuan</label>
+                                <select name="unit_id" class="form-control">
+                                    @foreach($units as $data) 
+                                        <option value="{{ $data->id }}" {{ $edit->unit_id == $data->id ? 'selected' : '' }}> {{ $data->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label>Stock</label>
                                 <input name="qty" type="number" min="1" value="{{ $edit->qty }}" class="form-control">
                             </div>

@@ -46,13 +46,6 @@
 @section('js')
 
 <script>
-
-    // alert
-    $(document).on('click', '.delete', function() { 
-        if (!confirm('Yakin Ingin Menghapus Data Ini ?')) {
-            return false;
-        }
-    });
     // yajra datatable
     $(document).ready(function(){
         $(function() {
@@ -70,6 +63,14 @@
                 ]
             });
         });
+    });
+
+
+    // alert delete
+    $(document).on('click', '.delete', function() { 
+        if (!confirm('Yakin Ingin Menghapus Data Ini ?')) {
+            return false;
+        }
     });
 </script>   
 @stop
