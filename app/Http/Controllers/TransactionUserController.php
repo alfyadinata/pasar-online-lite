@@ -105,8 +105,8 @@ class TransactionUserController extends Controller
 
     public function history()
     {
-        $transaction    =   Transaction::where('status','>',3)->get();
-        return view('transaction-history',compact('transaction'));
+        $transactions    =   Transaction::where('status','>',4)->where('user_id',auth()->user()->id)->get();
+        return view('transaction-history',compact('transactions'));
     }
 
     public function historyJson()
