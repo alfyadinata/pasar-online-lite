@@ -56,7 +56,7 @@
             <!-- Logo -->
             <div class="col-lg-2 col-sm-3 col-3 order-1">
                 <div class="logo_container">
-                    <div class="logo"><a href="{{ url('/') }}"><img src="{{ asset('logo.png') }}" alt="" style="width:45%;"></a></div>
+                    <div class="logo"><a href="{{ url('/') }}"><img src="{{ asset($config->logo) }}" alt="" style="width:45%;"></a></div>
                 </div>
             </div>
 
@@ -89,34 +89,41 @@
             </div>
 
             <!-- Wishlist -->
-            <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
-                <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-                    <div class="wishlist d-flex flex-row align-items-center justify-content-end">
-                        <div class="wishlist_icon"><img src="{{ asset('fe/images/heart.png')}}" alt=""></div>
-                        <div class="wishlist_content">
-                            <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                            <div class="wishlist_count">115</div>
-                        </div>
-                    </div>
-
-                    <!-- Cart -->
-                    <div class="cart">
-                        <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                            <div class="cart_icon">
-                                <img src="{{ asset('fe/images/cart.png')}}" alt="">
-                                    @if(auth()->check())
-                                        <div class="cart_count"><span>{{ \App\Cart::where('user_id',auth()->user()->id)->where('status',0)->count() }}</span></div>
-                                        @else
-                                        <div class="cart_count"><span>0<span></div>                                        
-                                    @endif
+            @if(auth()->check())
+                @php 
+                    $saldo  =   \App\Saldo::where('user_id',auth()->user()->id)->first();
+                @endphp
+                @if($saldo != null)
+                <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                    <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                        <div class="wishlist d-flex flex-row align-items-center justify-content-end">
+                            <div class="wishlist_icon">$</div>
+                            <div class="wishlist_content">
+                                <div class="wishlist_text"><a href="#!">Saldo</a></div>
+                                <div class="wishlist_count">{{ number_format($saldo->saldo,0 ,'',',') }}</div>
                             </div>
-                            <div class="cart_content">
-                                <div class="cart_text"><a href="{{ url('cart') }}">Cart</a></div>
+                        </div>
+
+                        <!-- Cart -->
+                        <div class="cart">
+                            <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                <div class="cart_icon">
+                                    <img src="{{ asset('fe/images/cart.png')}}" alt="">
+                                        @if(auth()->check())
+                                            <div class="cart_count"><span>{{ \App\Cart::where('user_id',auth()->user()->id)->where('status',0)->count() }}</span></div>
+                                            @else
+                                            <div class="cart_count"><span>0<span></div>                                        
+                                        @endif
+                                </div>
+                                <div class="cart_content">
+                                    <div class="cart_text"><a href="{{ url('cart') }}">Cart</a></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                @endif
+            @endif
         </div>
     </div>
 </div>

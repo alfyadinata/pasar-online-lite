@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
+use Alert;
 
 class SuperAdmin
 {
@@ -15,6 +17,12 @@ class SuperAdmin
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (Auth()->check()) {
+            if (auth()->user()->role_id == 1) {
+                return $next($request);
+            }
+        }
+        Alert::error('Akses Ditolak.','Oops')->persistent('Tutup');
+        return redirect()->back();
     }
 }

@@ -19,6 +19,9 @@ class CategoryController extends Controller
     public function __construct()
     {
         Visitor::create();
+        if (auth()->user()->role_id == 4) {
+            return redirect('/');
+        }
     }
 
     public function api(Request $request)

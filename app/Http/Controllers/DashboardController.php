@@ -12,6 +12,14 @@ use App\Store;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        Visitor::create();
+        if (auth()->user()->role_id == 4) {
+            return redirect('/');
+        }
+    }
+    
     public function index()
     {
         $user           =   auth()->user();

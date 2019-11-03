@@ -11,6 +11,14 @@ use DataTables;
 
 class PromotionController extends Controller
 {
+    public function __construct()
+    {
+        Visitor::create();
+        if (auth()->user()->role_id == 4) {
+            return redirect('/');
+        }
+    }
+    
     public function api()
     {
         $promotions =   Promotion::latest()->get();

@@ -63,6 +63,8 @@ Route::prefix('panel')->group(function () {
     Route::get('transaction/{uuid}/accept','TransactionController@accept')->name('acceptTransaction');
     // Cashier route
     Route::group(['middleware' => ['cashier']], function () {
+        // dashboard
+        Route::get('/dashboard','DashboardController@index')->name('iDashboard');
         // transaction
         Route::get('api/transaction','TransactionController@api')->name('apiTransaction');
         Route::get('transaction','TransactionController@index')->name('iTransaction');
@@ -77,6 +79,8 @@ Route::prefix('panel')->group(function () {
     });
     // seller route
     Route::group(['middleware' => ['seller']], function () {
+         // dashboard
+        Route::get('/dashboard','DashboardController@index')->name('iDashboard');
         // product
         Route::get('api/product','ProductController@api')->name('apiProduct');
         Route::get('product','ProductController@index')->name('iProduct');
@@ -161,7 +165,9 @@ Route::prefix('panel')->group(function () {
         Route::delete('transaction/delete-many','ProductController@destroyMany')->name('delManyTransaction');
         Route::get('transaction/history','TransactionController@history')->name('historyTransaction');
         Route::get('transaction/history/json','TransactionController@historyJson')->name('historyTransactionJson');
-
+        // top up
+        Route::get('top-up','TopUpController@index')->name('iTopUp');
+        Route::post('top-up','TopUpController@update');
         // promotion
         Route::get('promotion','PromotionController@index')->name('iPromotion');
         Route::post('promotion','PromotionController@store');

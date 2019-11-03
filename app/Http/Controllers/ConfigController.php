@@ -8,6 +8,14 @@ use Alert;
 
 class ConfigController extends Controller
 {
+    public function __construct()
+    {
+        Visitor::create();
+        if (auth()->user()->role_id == 4) {
+            return redirect('/');
+        }
+    }
+
     public function index()
     {
         $config =   Config::first();

@@ -81,15 +81,15 @@
                                             </div>
                                             <div class="col-lg-3">
                                                 <label>Metode Pembayaran</label>
-                                                <select name="payment_method" id="" class="form-control">
-                                                    <option value="0">Bayar Di Rumah</option>
-                                                    <option value="1">Bayar Dengan Saldo</option>
+                                                <select name="payment_method" id="" disabled class="form-control">
+                                                    <option value="0">Saldo</option>
+                                                    <option value="1">Bayar Di Rumah</option>
                                                 </select>
                                             </div>
                                             <div class="col-lg-3">
                                                 <label>Metode Pengiriman</label>
-                                                <select name="shipping_method" id="" class="form-control">
-                                                    <option value="0">GoJek</option>
+                                                <select name="shipping_method" disabled id="" class="form-control">
+                                                    <option value="0">Ojol</option>
                                                     <option value="1">Grab</option>
                                                     <option value="">Ambil Sendiri</option>
                                                 </select>
