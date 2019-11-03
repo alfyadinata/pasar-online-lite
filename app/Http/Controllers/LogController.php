@@ -6,16 +6,20 @@ use Illuminate\Http\Request;
 use App\Log;
 use DataTables;
 use App\helpers\Visitor;
+use Auth;
 
 class LogController extends Controller
 {
     public function __construct()
     {
         Visitor::create();
-        if (auth()->user()->role_id == 4) {
-            return redirect('/');
+        if (auth()->check()) {
+            if (Auth::user()->role_id == 4) {
+                return redirect('/');
+            }
         }
     }
+
     
     public function api(Request $request)
     {
