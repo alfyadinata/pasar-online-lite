@@ -52,9 +52,11 @@ class TransactionUserController extends Controller
                 $transaction->create([
                     'product_id' => $product->id,
                     'user_id' => $userId,
+                    'date' => date('Y-m-d'),
                     'payment_method' => $request->payment_method,
                     'admin_id'  => $request->admin_id,
                     'invoice'   =>  $invoice,
+                    'message'   => $cart->message,
                     'store_id'  => $product->store->id,
                     'status'    => 0,
                     'shipping_costs'    => 0,

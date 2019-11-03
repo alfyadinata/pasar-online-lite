@@ -66,7 +66,7 @@
                                         <div class="row">
                                             <div class="col-lg-3">
                                                 <label>Alamat Pengiriman</label>
-                                                <textarea name="address" cols="30" rows="2" class="form-control"></textarea>
+                                                <textarea name="address" cols="30" rows="2" class="form-control" required></textarea>
                                             </div>
                                             <div class="col-lg-3">
                                                 <label> Admin Transaksi</label>

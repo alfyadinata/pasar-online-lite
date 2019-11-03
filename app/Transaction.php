@@ -9,7 +9,7 @@ use Uuid;
 class Transaction extends Model
 {
     use SoftDeletes;
-    protected $fillable =   ['uuid','product_id',	'payment_method',	'store_id',	'invoice',	'user_id',
+    protected $fillable =   ['uuid','product_id', 'message', 'date',	'payment_method',	'store_id',	'invoice',	'user_id',
                         	'admin_id',	'total',	'status',	'receiver_address',	',shipping_costs'];
     // uuid 
     protected static function boot()

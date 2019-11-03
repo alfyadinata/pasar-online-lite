@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->uuid('uuid');
             $table->BigInteger('product_id')->unsigned();
             $table->text('message')->nullable();
+            $table->string('date');
             $table->BigInteger('payment_method')->default(0);
             $table->BigInteger('store_id')->unsigned();
             $table->string('invoice');
