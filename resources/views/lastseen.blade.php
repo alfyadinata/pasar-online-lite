@@ -18,20 +18,26 @@
 
 						<div class="owl-carousel owl-theme viewed_slider">
 							@foreach($lastseen as $data)
-                                <!-- Recently Viewed Item -->
-                                <div class="owl-item">
-                                    <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="{{ asset('images/'.$data->id) }}" alt=""></div>
-                                        <div class="viewed_content text-center">
-                                            <div class="viewed_price">$375</div>
-                                            <div class="viewed_name"><a href="#">Speedlink...</a></div>
-                                        </div>
-                                        <ul class="item_marks">
-                                            <li class="item_mark item_discount">-25%</li>
-                                            <li class="item_mark item_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
+								@php
+									$product	=	\App\Product::where('id',$data->product_id)->first();
+
+								@endphp
+								<!-- Recently Viewed Item -->
+								@if($product != null)
+									<div class="owl-item">
+										<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+											<div class="viewed_image"><img src="{{ asset('images/'.$product->foto) }}" alt=""></div>
+											<div class="viewed_content text-center">
+												<div class="viewed_price">{{ number_format($product->price,0,'',',') }}</div>
+												<div class="viewed_name"><a href="{{ route('showProduct',$product->slug) }}">{{ $product->name }}</a></div>
+											</div>
+											<ul class="item_marks">
+												<!-- <li class="item_mark item_discount">-25%</li>
+												<li class="item_mark item_new">new</li> -->
+											</ul>
+										</div>
+									</div>
+								@endif
                             @endforeach
 						</div>
 					</div>
