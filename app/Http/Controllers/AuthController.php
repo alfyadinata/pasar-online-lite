@@ -7,39 +7,34 @@ use Auth;
 use App\User;
 use App\Store;
 use Alert;
-
+use App\Saldo;
 class AuthController extends Controller
 {
     // 1 = superadmin
     // 2 = kasir
     // 3 = pedagang
     // 4 = pembeli 
-    // 5 moderator
     public function register(Request $request)
     {
-        // dd($request->All());
-        // $this->validate($request,[
-        //     'name' => 'required|min:6',
-        //     'password' =>'required|min:6',
-        //     'email' => 'required|email',
-        // ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'password' => bcrypt($request->password),
-            'email' =>  $request->email,
-            'active' => 1,
-            'phone_number' => $request->phone_number,
-            'role_id' => 4,
-        ]);
-
-        if ($user) {
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'password' => bcrypt($request->password),
+                'email' =>  $request->email,
+                'active' => 1,
+                'phone_number' => $request->phone_number,
+                'role_id' => 4,
+            ]);
+            // generate saldo
+            Saldo::create([
+                'user_id' => $user->id,
+                'saldo' =>  1000,
+            ]);            
             alert()->message('Berhasil Membuat Akun','Sukses !')->autoclose(4500);
             return redirect('login');
-        }else {
+        } catch (\Throwable $th) {
             alert()->error('Ada Kesalahan.','Gagal !')->autoclose(4500);
-            return redirect()->back();
-        }
+            return redirect()->back();        }
     }
 
     public function login(Request $request)
