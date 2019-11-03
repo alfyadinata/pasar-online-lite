@@ -73,7 +73,7 @@
                                                 <select name="admin_id" id="" class="form-control">
                                                     @foreach($admins as $data)
                                                         @php 
-                                                            $counter    =   \App\Transaction::where('status',1)->count();
+                                                            $counter    =   \App\Transaction::where('status','!=',5)->count();
                                                         @endphp
                                                     <option value="{{ $data->id }}">{{ $data->name }}({{ $counter}} Transaksi)</option>
                                                     @endforeach
