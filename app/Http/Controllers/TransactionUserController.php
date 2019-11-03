@@ -36,7 +36,7 @@ class TransactionUserController extends Controller
     public function store(Request $request)
     {
         $transaction    =   new Transaction;
-        try {
+        // try {
         //    database transaction
             DB::beginTransaction();
             foreach ($request->cart_id as $key => $value) {
@@ -70,7 +70,7 @@ class TransactionUserController extends Controller
                     'product_id' => $product->id,
                     'user_id' => $userId,
                     'date' => date('Y-m-d'),
-                    'payment_method' => $request->payment_method,
+                    'payment_method' => 0,
                     'admin_id'  => $request->admin_id,
                     'invoice'   =>  $invoice,
                     'message'   => $cart->message,
@@ -91,11 +91,11 @@ class TransactionUserController extends Controller
             DB::commit();
             Alert::success('Silahkan Tunggu Respon Penjual.','Sukses')->autoclose(4500);
             return redirect()->back();
-        } catch (\Throwable $th) {
-            DB::rollback();
-            Alert::error('Ada Kesalahan.','Gagal.')->persistent('Tutup');
-            return redirect()->back();
-        }
+        // } catch (\Throwable $th) {
+        //     DB::rollback();
+        //     Alert::error('Ada Kesalahan.','Gagal.')->persistent('Tutup');
+        //     return redirect()->back();
+        // }
     }
 
     public function destroy(Request $request)
