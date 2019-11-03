@@ -9,15 +9,19 @@ use App\Store;
 use App\Promotion;
 use App\LastSeen;
 use App\Blog;
+use DB;
 
 class IndexController extends Controller
 {
     public function index()
     {
         $products    =   Product::latest()->Limit(20)->get();
-        // $promotions =   Promotion::latest()->get();
+        $lastseen   =   [];
+        if (auth()->check()) {
+            $lastseen    =  DB::table('last_seens')->where('user_id',auth()->user()->id)->Limit(5)->latest()->distinct('product_id')->get();
+        }
         $stores     =   Store::latest()->get();
-        return view('index',compact('products','promotions','stores'));
+        return view('index',compact('products','promotions','stores','lastseen'));
     }
 
     public function showProduct($slug)
@@ -27,14 +31,15 @@ class IndexController extends Controller
 
         // last seen
         if (auth()->check()) {
-            LastSeen::create([
-                'user_id' => auth()->user()->id,
-                'product_id' => $detail->id
-            ]);
+            $last   =   LastSeen::where('user_id',auth()->user()->id)->where('product_id',$detail->id)->latest()->Limit(15)->first();
+            if ($last == null) {
+                LastSeen::create([
+                    'user_id' => auth()->user()->id,
+                    'product_id' => $detail->id
+                ]);
+            }
         }
-
         $detail->save();
-        // dd($detail);
         return view('detail-product',compact('detail'));
     }
 

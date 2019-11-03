@@ -13,6 +13,9 @@
 
     @include('banner')
 
+    @if(auth()->check())
+        @include('lastseen')
+    @endif
     @include('latest-product')
     @include('hot-best-seller')
 @stop

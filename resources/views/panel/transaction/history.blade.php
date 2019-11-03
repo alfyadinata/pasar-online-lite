@@ -7,7 +7,7 @@
 <div id="page-wrapper" style="min-height: 335px;">
     <div class="main-page">
         <div class="tables">
-            <h3 class="title1">Transaksi Berlangsung</h3>
+            <h3 class="title1">Riwayat Transaksi</h3>
             <div class="table-responsive bs-example widget-shadow">
                 <h4>Data :</h4>
                 <form action="{{ route('delManyCashier') }}" onsubmit="return confirm('Yakin Ingin Menghapus Data Terpilih ?');" method="post">
@@ -27,7 +27,7 @@
                                 <th>Customer</th>
                                 <th>Invoice</th> 
                                 <th>Status</th>
-                                <th>Aksi</th> 
+                                <th>Date</th> 
                             </tr> 
                         </thead> 
                         <tbody> 
@@ -96,12 +96,6 @@
             return false;
         }
     });
-        // alert accept final
-    $(document).on('click', '.accepted', function() { 
-        if (!confirm('Transaksi Telah Selesai ?')) {
-            return false;
-        }
-    });
     // alert
     $(document).on('click', '.send', function() { 
         if (!confirm('Kirim Pesanan ini ?')) {
@@ -115,13 +109,13 @@
             $('#datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route("apiTransaction") }}',
+                ajax: '{{ route("historyTransactionJson") }}',
                 columns: [
                     {data: 'checker', name: 'checker', orderable: false, searchable: false},
                     { data: 'customer', name: 'customer' },
                     { data: 'invoice', name: 'invoice' },
-                    {data: 'status', name: 'status', searchable: false},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                    {data: 'status', name: 'status' },
+                    {data: 'date', name: 'date'},
                 ]
             });
         });

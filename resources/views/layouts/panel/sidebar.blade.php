@@ -45,12 +45,8 @@
 									<a href="{{ route ('iTransaction')}}"><i class="fa fa-table nav_icon"></i>Transaksi Berlangsung</a>
 								</li>
 								<li>
-									<a href="compose.html"><i class="fa fa-table nav_icon"></i>Transaksi Selesai</a>
-								</li>
-								<li>
-									<a href="compose.html"><i class="fa fa-table nav_icon"></i>History Transaksi</a>
-								</li>
-								
+									<a href="{{ route('historyTransaction') }}"><i class="fa fa-table nav_icon"></i>History</a>
+								</li>								
 							</ul>
 							<!-- //nav-second-level -->
 						</li>
@@ -75,10 +71,7 @@
 									<a href="{{ route ('iTransaction')}}"><i class="fa fa-table nav_icon"></i>Transaksi Berlangsung</a>
 								</li>
 								<li>
-									<a href="compose.html"><i class="fa fa-table nav_icon"></i>Transaksi Selesai</a>
-								</li>
-								<li>
-									<a href="compose.html"><i class="fa fa-table nav_icon"></i>History Transaksi</a>
+									<a href="{{ route('historyTransaction') }}"><i class="fa fa-table nav_icon"></i>History</a>
 								</li>
 								
 							</ul>
@@ -100,7 +93,7 @@
 									<a href="{{ route ('iTransaction')}}"><i class="fa fa-table nav_icon"></i>Transaksi Berlangsung</a>
 								</li>
 								<li>
-									<a href="typography.html"><i class="fa fa-table nav_icon"></i>History</a>
+									<a href="{{ route('historyTransaction') }}"><i class="fa fa-table nav_icon"></i>History</a>
 								</li>
 							</ul>
 							<!-- /nav-second-level -->

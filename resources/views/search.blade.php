@@ -2,7 +2,8 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/plugins/jquery-ui-1.12.1.custom/jquery-ui.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/styles/shop_styles.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/styles/shop_responsive.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('fe/styles/shop_responsive.css')}}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 @stop 
 
 @section('content')
@@ -66,12 +67,12 @@
                                     <!-- Product Item -->
                                     <div class="product_item">
                                         <div class="product_border"></div>
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"style="padding:4px;"><img src="{{ asset('images/'.$data->foto) }}" alt=""></div>
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"style="padding:4px;"><img src="{{ asset('images/'.$data->foto) }}"></div>
                                         <div class="product_content">
                                             <div class="product_price">{{ number_format($data->price,0,'',',') }}.00</div>
                                             <div class="product_name"><div><a href="{{ route('showProduct',$data->slug) }}" tabindex="0">{{ $data->name }}</a></div></div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+										<a data-href="{{ route('postWishList',$data->id) }}" class="wishList">a<div class="product_fav"><i class="fas fa-heart wishQ"></i></div></a>
                                     </div>
                                 @endforeach
 
@@ -109,5 +110,24 @@
 <script src="{{ asset('fe/plugins/jquery-ui-1.12.1.custom/jquery-ui.js') }}"></script>
 <script src="{{ asset('fe/plugins/parallax-js-master/parallax.min.js') }}"></script>
 <script src="{{ asset('fe/js/shop_custom.js') }}"></script>
+<script>
+    // ajax wishList
+    $(document).on('click', '.wishList', function() { 
+            var dataURL = $(this).attr('data-href');
+			$.ajax({
+					// data: data,
+					type: "GET",
+					url: dataUrl,
+					success: function(data){
+						alert("Data Save: " + data);
+					}
+			});
+            // $('.modal-body').load(dataURL,function(){
+            //     $('#myModalEdit').modal({show:true});
+            // });
+	    });
+	});
+</script>
+
 
 @stop

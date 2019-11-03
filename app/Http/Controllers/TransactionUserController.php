@@ -19,14 +19,15 @@ use Illuminate\Support\Facades\DB;
 class TransactionUserController extends Controller
 {
     // ==> transaction status <==
-    // status 0 =  waiting response seller
-    // status 1 = in proses by admin
-    // status 3 = in delivery
-    // status 4 = complete
-    // status 5 = cancel by seller
-    // status 6 = cancel by customer(before process by seller, customers can cancel order)
+    // status 0 =  menunggu respon penjual
+    // status 1 =  di acc penjual
+    // status 3 =  sedang di proses oleh adminstrator
+    // status 4 = barang sedang di kirim
+    // status 5 = pesanan sudah sampai(selesai)
+    // status 6 = dibatalkan penjual
+    // status 7 = dibatalkan pembeli
     // ==> payment method <==
-    // 0    = bayar di tempat
+    // 0    = saldo
     public function __construct()
     {
         Visitor::create();
@@ -46,12 +47,11 @@ class TransactionUserController extends Controller
                 $uuid   =   Uuid::generate()->string;
                 // dd($uuid);
                 $invoice    =   date('Y').date('m').date('d').$latestId;
-                // generate store id 
+                // tampung cart
                 $cart    =   Cart::where('user_id',$userId)->where('id',$request->cart_id[$key])->where('status',0)->first();
                 $product    =   Product::where('id',$cart->product_id)->first();
                 // check saldo
                 $saldo  =   Saldo::where('user_id',$userId)->first();
-                // dd($saldo);
                 if ($saldo->saldo < $cart->total) {
                     Alert::info('Saldo Tidak Cukup.','Gagal')->autoclose(4500);
                     return redirect()->back();                    
@@ -59,6 +59,11 @@ class TransactionUserController extends Controller
                 // kurangi saldo user
                 $saldo->update([
                     'saldo' => $saldo->saldo - $cart->total
+                ]);
+                // kurangi stock
+                $stockProduct   =   Product::where('id',$cart->product_id)->first();
+                $stockProduct->update([
+                    'qty'   =>  $stockProduct->qty - $cart->qty,
                 ]);
                 Logs::store('Saldo di kurangi : '.number_format($cart->total,0,'',','));                
                 $transaction->create([

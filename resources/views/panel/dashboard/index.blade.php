@@ -13,11 +13,31 @@
                 <div class="row-one">
 					<div class="col-md-4 widget states-last">
 						<div class="stats-left ">
-							<h5>Today</h5>
-							<h4>Sales</h4>
+							<h5>total</h5>
+							<h4>Penjualan</h4>
 						</div>
 						<div class="stats-right">
-							<label> 45</label>
+							<label>{{ $sales }}</label>
+						</div>
+						<div class="clearfix"> </div>	
+					</div>
+					<div class="col-md-4 widget states-last">
+						<div class="stats-left ">
+							<h5>total</h5>
+							<h4>Transaksi</h4>
+						</div>
+						<div class="stats-right">
+							<label>{{ $transaction }}</label>
+						</div>
+						<div class="clearfix"> </div>	
+					</div>
+					<div class="col-md-4 widget states-last">
+						<div class="stats-left ">
+							<h5>total</h5>
+							<h4>Produk</h4>
+						</div>
+						<div class="stats-right">
+							<label>{{ $product }}</label>
 						</div>
 						<div class="clearfix"> </div>	
 					</div>

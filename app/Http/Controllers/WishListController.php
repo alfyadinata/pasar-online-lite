@@ -7,10 +7,11 @@ use App\WishList;
 
 class WishListController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $wList  =   new WishList;
         $request['user_id'] =   auth()->user()->id;
+        $request['product_id']  =   $id;
         try {
             $wList->create($request->all());
             // Alert::success('');

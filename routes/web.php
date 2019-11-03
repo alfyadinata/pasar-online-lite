@@ -47,7 +47,7 @@ Route::group(['middleware' => ['customer']], function () {
     Route::get('store-register','AuthController@getStoreRegister');
     Route::post('store-register','AuthController@postStoreRegister')->name('regStore');
     // wishlist
-    Route::post('wishlist','WishListController@store')->name('postWishList');
+    Route::get('wishlist/{id}','WishListController@store')->name('postWishList');
     // cart
     Route::get('cart','CartUserController@index')->name('cart');
     Route::post('cart','CartUserController@store')->name('postCart');
@@ -59,6 +59,22 @@ Route::group(['middleware' => ['customer']], function () {
 });
     // Prefix Route    
 Route::prefix('panel')->group(function () {
+    // transaction accept
+    Route::get('transaction/{uuid}/accept','TransactionController@accept')->name('acceptTransaction');
+    // Cashier route
+    Route::group(['middleware' => ['cashier']], function () {
+        // transaction
+        Route::get('api/transaction','TransactionController@api')->name('apiTransaction');
+        Route::get('transaction','TransactionController@index')->name('iTransaction');
+        Route::get('transaction/detail/{uuid}','TransactionController@show')->name('showTransaction');
+        Route::get('transaction/edit/{uuid}','TransactionController@edit')->name('eTransaction');
+        Route::post('transaction/edit/{uuid}','TransactionController@update')->name('uTransaction');
+        Route::get('transaction/history','TransactionController@history')->name('historyTransaction');
+        Route::get('transaction/history/json','TransactionController@historyJson')->name('historyTransactionJson');
+        // Route::get('transaction/{uuid}/accept','TransactionController@accept')->name('acceptTransaction');
+
+        Route::delete('transaction/delete-many','ProductController@destroyMany')->name('delManyTransaction');
+    });
     // seller route
     Route::group(['middleware' => ['seller']], function () {
         // product
@@ -77,20 +93,12 @@ Route::prefix('panel')->group(function () {
         Route::get('transaction/edit/{uuid}','TransactionController@edit')->name('eTransaction');
         Route::post('transaction/edit/{uuid}','TransactionController@update')->name('uTransaction');
         Route::delete('transaction/delete-many','ProductController@destroyMany')->name('delManyTransaction');
-        Route::get('transaction/{uuid}/accept','TransactionController@accept')->name('acceptTransaction');
+        Route::get('transaction/history','TransactionController@history')->name('historyTransaction');
+        Route::get('transaction/history/json','TransactionController@historyJson')->name('historyTransactionJson');
+        // Route::get('transaction/{uuid}/accept','TransactionController@accept')->name('acceptTransaction');
         Route::get('transaction/{uuid}/decline','TransactionController@decline')->name('declineTransaction');
         // store configuration
         Route::get('store-setting','StoreController@index')->name('iSettingStore');
-    });
-    // Cashier route
-    Route::group(['middleware' => ['cashier']], function () {
-        // transaction
-        Route::get('api/transaction','TransactionController@api')->name('apiTransaction');
-        Route::get('transaction','TransactionController@index')->name('iTransaction');
-        Route::get('transaction/detail/{uuid}','TransactionController@show')->name('showTransaction');
-        Route::get('transaction/edit/{uuid}','TransactionController@edit')->name('eTransaction');
-        Route::post('transaction/edit/{uuid}','TransactionController@update')->name('uTransaction');
-        Route::delete('transaction/delete-many','ProductController@destroyMany')->name('delManyTransaction');
     });
     // superadmin route
     Route::group(['middleware' => ['auth']], function () {
@@ -151,6 +159,9 @@ Route::prefix('panel')->group(function () {
         Route::post('transaction/edit/{uuid}','TransactionController@update')->name('uTransaction');
         Route::get('transaction/delete/{uuid}','TransactionController@destroy')->name('delTransaction');
         Route::delete('transaction/delete-many','ProductController@destroyMany')->name('delManyTransaction');
+        Route::get('transaction/history','TransactionController@history')->name('historyTransaction');
+        Route::get('transaction/history/json','TransactionController@historyJson')->name('historyTransactionJson');
+
         // promotion
         Route::get('promotion','PromotionController@index')->name('iPromotion');
         Route::post('promotion','PromotionController@store');
