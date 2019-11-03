@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\helpers\Visitor;
 use App\Config;
 use Alert;
 

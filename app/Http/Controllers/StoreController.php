@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Store;
 use Alert;
 use Auth;
+use App\helpers\Visitor;
+
 class StoreController extends Controller
 {
     public function __construct()

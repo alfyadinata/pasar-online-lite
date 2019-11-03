@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Log;
 use DataTables;
+use App\helpers\Visitor;
 
 class LogController extends Controller
 {

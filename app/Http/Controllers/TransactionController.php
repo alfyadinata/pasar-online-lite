@@ -7,6 +7,7 @@ use App\Transaction;
 use App\Product;
 use App\Cart;
 use App\helpers\Logs;
+use App\helpers\Visitor;
 use App\Store;
 use DataTables;
 use Alert;

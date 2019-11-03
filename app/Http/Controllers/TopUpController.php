@@ -7,6 +7,7 @@ use App\Saldo;
 use App\User;
 use Alert;
 use App\helpers\Logs;
+use App\helpers\Visitor;
 
 class TopUpController extends Controller
 {

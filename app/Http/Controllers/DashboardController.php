@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Transaction;
 use App\Product;
 use App\Visitor;
+use App\helpers\Visitor as Visit;
 use App\Category;
 use App\Store;
 
@@ -14,7 +15,7 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        Visitor::create();
+        Visit::create();
         if (auth()->user()->role_id == 4) {
             return redirect('/');
         }

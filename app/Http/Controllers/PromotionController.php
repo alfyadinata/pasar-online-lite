@@ -8,6 +8,7 @@ use App\Promotion;
 use App\helpers\Logs;
 use Alert;
 use DataTables;
+use App\helpers\Visitor;
 
 class PromotionController extends Controller
 {
