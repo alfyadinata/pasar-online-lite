@@ -11,6 +11,7 @@ use App\Store;
 use DataTables;
 use Alert;
 use Auth;
+use Facades\Yugo\SMSGateway\Interfaces\SMS;
 
 class TransactionController extends Controller
 {
@@ -186,7 +187,7 @@ class TransactionController extends Controller
     {
         $transaction    =   Transaction::where('uuid',$uuid)->firstOrFail();
         $transaction->update([
-            'status'    =>  6
+            'status'    =>  5
         ]);
         Logs::store('Menolak transaksi, id transaksi='. $transaction->id);
         Alert::info('Transaksi Di Tolak.','Sukses')->autoclose(4500);
@@ -199,6 +200,9 @@ class TransactionController extends Controller
         $transaction->update([
             'status'    =>  1
         ]);
+        $message    =   'Hi '.$transaction->user->name.','.'Pesanan kamu dengan invoice:'.
+                        $transaction->invoice.' Telah Di Proses Oleh Penjual. #PasarOnline';
+        SMS::send([$transaction->user->phone_number], $message);
         Logs::store('Menerima transaksi, id transaksi='. $transaction->id);
         Alert::info('Transaksi Di Terima.','Sukses')->autoclose(4500);
         return redirect()->back();

@@ -1,5 +1,8 @@
 <?php
-
+// use Facades\Yugo\SMSGateway\Interfaces\SMS;
+// Route::get('sms', function() {
+//     return SMS::send(['62895322118828'], 'Hello, how are you?');
+// });
 
 Route::get('/generate', function() {
 \App\Role::create([
@@ -51,6 +54,8 @@ Route::group(['middleware' => ['customer']], function () {
     Route::get('cart/{uuid}','CartUserController@destroy')->name('delCart');
     // transaction
     Route::post('transaction','TransactionUserController@store')->name('userTransaction');
+    Route::get('transaction-history','TransactionUserController@history')->name('historyTransaction');
+    Route::get('transaction-history/json','TransactionUserController@historyJson')->name('jsonHistoryTransaction');
 });
     // Prefix Route    
 Route::prefix('panel')->group(function () {

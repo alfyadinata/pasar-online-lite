@@ -12,6 +12,7 @@ use App\Product;
 use App\Cart;
 use Alert;
 use Uuid;
+use DataTables;
 use Illuminate\Support\Facades\DB;
 
 class TransactionUserController extends Controller
@@ -84,5 +85,44 @@ class TransactionUserController extends Controller
     public function destroy(Request $request)
     {
         
+    }
+
+    public function history()
+    {
+        $transaction    =   Transaction::where('status','>',3)->get();
+        return view('transaction-history',compact('transaction'));
+    }
+
+    public function historyJson()
+    {
+        $transaction    =   Transaction::where('user_id',auth()->user()->id)->where('status','>',3)->get();
+        return DataTables::of($transaction)->addIndexColumn()
+        ->addColumn('date', function($row) {
+            $date   =   $row->date;
+            return $date;
+        })
+        ->addColumn('status', function($row) {
+            $status =   '';
+            if ($row->status == 4) {
+                $status = 'Selesai Di Lakukan';
+            }
+            if ($row->status == 5) {
+                $status =   'Di Batalkan Penjual';
+            }
+            if ($row->status == 6) {
+                $status =   'Di Batalkan Pembeli';
+            }
+            return $status;
+        })
+        ->addColumn('product', function($row) {
+            $productId  =   Product::where('id',$row->product_id)->first();
+            $product =   $productId->name;
+            return $product;
+        })
+        ->addColumn('invoice', function($row) {
+            $invoice =   $row->invoice;
+            return $invoice;
+        })
+        ->rawColumns(['status','date','product','invoice'])->make(true);
     }
 }
