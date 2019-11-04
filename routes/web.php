@@ -53,6 +53,7 @@ Route::group(['middleware' => ['customer']], function () {
     Route::post('cart','CartUserController@store')->name('postCart');
     Route::get('cart/{uuid}','CartUserController@destroy')->name('delCart');
     // transaction
+    Route::get('transaction','TransactionUserController@index')->name('iTransaction');
     Route::post('transaction','TransactionUserController@store')->name('userTransaction');
     Route::get('transaction-history','TransactionUserController@history')->name('historyTransaction');
     Route::get('transaction-history/json','TransactionUserController@historyJson')->name('jsonHistoryTransaction');
@@ -74,8 +75,10 @@ Route::prefix('panel')->group(function () {
         Route::get('transaction/history','TransactionController@history')->name('historyTransaction');
         Route::get('transaction/history/json','TransactionController@historyJson')->name('historyTransactionJson');
         // Route::get('transaction/{uuid}/accept','TransactionController@accept')->name('acceptTransaction');
-
         Route::delete('transaction/delete-many','ProductController@destroyMany')->name('delManyTransaction');
+        // top up
+        Route::get('top-up','TopUpController@index')->name('iTopUp');
+        Route::post('top-up','TopUpController@update');
     });
     // seller route
     Route::group(['middleware' => ['seller']], function () {
@@ -136,6 +139,15 @@ Route::prefix('panel')->group(function () {
         Route::post('cashier/edit/{uuid}','CashierController@update')->name('uCashier');
         Route::get('cashier/delete/{uuid}','CashierController@destroy')->name('delCashier');    
         Route::delete('cashier/delete-many','CashierController@destroyMany')->name('delManyCashier');
+        // customer 
+        Route::get('api/Customer','CustomerController@api')->name('apiCustomer');
+        Route::get('Customer','CustomerController@index')->name('iCustomer');
+        Route::post('Customer','CustomerController@store');
+        Route::get('Customer/create','CustomerController@create')->name('cCustomer');
+        Route::get('Customer/edit/{uuid}','CustomerController@edit')->name('eCustomer');
+        Route::post('Customer/edit/{uuid}','CustomerController@update')->name('uCustomer');
+        Route::get('Customer/delete/{uuid}','CustomerController@destroy')->name('delCustomer');    
+        Route::delete('Customer/delete-many','CustomerController@destroyMany')->name('delManyCustomer');
         // logs
         Route::get('api/logs','LogController@api')->name('apiLogs');
         Route::get('logs','LogController@index')->name('logs');

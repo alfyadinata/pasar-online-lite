@@ -28,7 +28,6 @@
                                 <th>Nama Produk</th>
                                 <th>Mulai</th>
                                 <th>Selesai</th> 
-                                <th>Aksi</th> 
                             </tr> 
                         </thead> 
                         <tbody> 
@@ -94,7 +93,6 @@
                     { data: 'product', name: 'product' },
                     {data: 'start', name: 'start' },
                     { data: 'finish', name: 'finish' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
         });

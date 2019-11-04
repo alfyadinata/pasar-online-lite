@@ -24,13 +24,13 @@
 
 					<div class="main_nav_menu ml-auto">
 						<ul class="standard_dropdown main_nav_dropdown">
-							<li><a href="index.html">Home<i class="fas fa-chevron-down"></i></a></li>
+							<li><a href="http://localhost:8888/">Home<i class="fas fa-chevron-down"></i></a></li>
 							@if(auth()->check())
 								<li class="hassubs">
 									<a href="#">Transaksi<ifas class="fas fa-chevron-down"></ifas></a>
 									<ul>
 										<li><a href="">Berlangsung<i class="fas fa-chevron-down"></i></a></li>
-										<li><a href="{{ route('historyTransaction') }}">History<i class="fas fa-chevron-down"></i></a></li>
+										<li><a href="{{ url('transaction-history') }}">History<i class="fas fa-chevron-down"></i></a></li>
 									</ul>
 								</li>
 							@endif
@@ -38,8 +38,8 @@
 							<li class="hassubs">
 								<a href="#">Pages<i class="fas fa-chevron-down"></i></a>
 								<ul>
-									<li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-									<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="cart">Cart<i class="fas fa-chevron-down"></i></a></li>
+									<!-- <li><a href="contact">Contact<i class="fas fa-chevron-down"></i></a></li> -->
 								</ul>
 							</li>
 							<li><a href="{{ url('blogs') }}">Blog<i class="fas fa-chevron-down"></i></a></li>

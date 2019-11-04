@@ -1,18 +1,8 @@
-@php 
-    $store  =   \App\Store::where('user_id',$edit->id)->first();
-@endphp
-
-
-<form action="{{ route('uSeller',$edit->uuid) }}" method="post">
+<form action="{{ route('uCustomer',$edit->uuid) }}" method="post">
     @csrf
     <div class="form-group"> 
         <label>Nama </label> 
         <input name="name" type="text" value="{{ $edit->name }}" class="form-control" placeholder="Nama"> 
-    </div>
-
-    <div class="form-group">
-        <label>Lini Toko</label>
-        <input type="text" readonly value="{{ $store->name }}" class="form-control">
     </div>
 
     <div class="form-group"> 

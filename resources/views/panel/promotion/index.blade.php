@@ -7,7 +7,7 @@
         <div class="tables">
             <h3 class="title1">Promotion</h3>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Tambah Promosi
+                Ubah Banner Promote
             </button>
             <div class="table-responsive bs-example widget-shadow">
                 <h4>Data :</h4>
@@ -28,7 +28,6 @@
                                 <th>Nama Produk</th>
                                 <th>Mulai</th>
                                 <th>Selesai</th> 
-                                <th>Aksi</th> 
                             </tr> 
                         </thead> 
                         <tbody> 
@@ -94,7 +93,6 @@
                     { data: 'product', name: 'product' },
                     {data: 'start', name: 'start' },
                     { data: 'finish', name: 'finish' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
         });

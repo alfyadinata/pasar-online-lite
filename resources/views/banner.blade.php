@@ -13,11 +13,11 @@
 				<div class="col-lg-5 offset-lg-4 fill_height">
 					<div class="banner_content">
 						<h1 class="banner_text">{{ $promo->message }}</h1>
-						<div class="banner_price">Rp. {{ number_format($promo->product->price,0,'',',') }}.00</div>
+						<div style="color:white;" class="banner_price">Rp. {{ number_format($promo->product->price,0,'',',') }}.00</div>
 						<!-- <div class="banner_product_name" style="color:blue;">{{ $promo->product->name }}</div> -->
-						<button class="btn btn-primary">
-							Masukan ke Cart
-						</button>
+						<a href="{{ route('showProduct',$promo->product->slug) }}" class="btn btn-primary">
+							Lihat
+						</a>
 					</div>
 				</div>
 			</div>
