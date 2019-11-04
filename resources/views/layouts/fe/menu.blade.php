@@ -31,7 +31,7 @@
                             </ul>
                         </li>
                         <li class="page_menu_item">
-                            <a href="index.html">Home<i class="fa fa-angle-down"></i></a>
+                            <a href="{{ url('/') }}">Home<i class="fa fa-angle-down"></i></a>
                         </li>
                         <li class="page_menu_item has-children">
                             <a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
@@ -70,7 +70,7 @@
                             </ul>
                         </li>
                         <li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
-                        <li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li>
+                        <!-- <li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li> -->
                     </ul>
                     
                     <div class="menu_contact">
