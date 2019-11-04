@@ -22,7 +22,6 @@
                                 <th>Message</th> 
                                 <th>User</th>
                                 <th>Method</th>
-                                <th>Aksi</th> 
                             </tr> 
                         </thead> 
                         <tbody> 
@@ -52,7 +51,6 @@
                     { data: 'message', name: 'message' },
                     { data: 'user', name: 'user' },
                     { data: 'method', name: 'method' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
         });
