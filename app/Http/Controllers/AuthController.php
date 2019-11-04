@@ -47,6 +47,12 @@ class AuthController extends Controller
         $password = $request->get('password');
         $check  =   User::where('email',$email)->first();
         if ($check != null) {
+            if ($check->role_id == 3) {
+                if ($check->active == 0) {
+                    alert()->error('Akun Tidak Aktif.','Gagal.')->autoclose(4500);
+                    return redirect()->back();                    
+                }
+            }
             if (\Auth::attempt(['email' => $email,'password' => $password])) {
                 if ($check->role_id == 4) {
                     alert()->message('Selamat Datang '. $check->name,'Login Berhasil.')->autoclose(4500);

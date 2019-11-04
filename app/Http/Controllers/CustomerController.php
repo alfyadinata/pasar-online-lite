@@ -9,7 +9,7 @@ use App\User;
 use Alert;
 use DataTables;
 
-class SellerController extends Controller
+class CustomerController extends Controller
 {
     public function __construct()
     {
@@ -24,8 +24,8 @@ class SellerController extends Controller
 
     public function api()
     {
-        $sellers   =   User::where('role_id',3)->latest()->get();
-        return DataTables::of($sellers)->addIndexColumn()
+        $Customers   =   User::where('role_id',4)->latest()->get();
+        return DataTables::of($Customers)->addIndexColumn()
         ->addColumn('checker', function($row) {
             $checker = '<div class="custom-checkbox custom-control">
                             <input type="checkbox" name="checked[]" value="'. $row->uuid.'" class="checks form-control">
@@ -34,8 +34,8 @@ class SellerController extends Controller
             return $checker;
         } )
         ->addColumn('action', function($row) {
-            $btn    =   '<a data-href="'.route("eSeller",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
-                            '<a href="'.route("delSeller",$row->uuid).'" class="delete btn btn-danger">
+            $btn    =   '<a data-href="'.route("eCustomer",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
+                            '<a href="'.route("delCustomer",$row->uuid).'" class="delete btn btn-danger">
                             Hapus
                         </a>';
             return $btn;
@@ -47,12 +47,12 @@ class SellerController extends Controller
 
     public function index()
     {
-        return view('panel.seller.index');
+        return view('panel.Customer.index');
     }    
 
     public function create()
     {
-        return view('panel.seller.create');
+        return view('panel.Customer.create');
     }
 
     public function store(Request $request)
@@ -72,7 +72,7 @@ class SellerController extends Controller
                 'role_id'   => 2                
             ]);
 
-            Logs::store(auth()->user()->email. ' Membuat penjual '. $request->email[$key]);
+            Logs::store(auth()->user()->email. ' Membuat Kasir '. $request->email[$key]);
         }
 
         Alert::success('Berhasil Membuat Data','Sukses')->autoclose(4500);
@@ -83,30 +83,31 @@ class SellerController extends Controller
     public function edit($uuid)
     {
         $edit   =   User::where('uuid',$uuid)->firstOrFail();
-        return view('panel.seller.edit',compact('edit'));
+        // dd($edit);
+        return view('panel.Customer.edit',compact('edit'));
     }
 
     public function update($uuid, Request $request)
     {
-        $seller    =   User::where('uuid',$uuid)->firstOrFail();
+        $Customer    =   User::where('uuid',$uuid)->firstOrFail();
         $password = $request->password;
-        $seller->update([
+        $Customer->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $password == null ? $seller->password : $password,
+            'password' => bcrypt($password == null ? $Customer->password : $password),
             'phone_number' => $request->phone_number,
             'active' => $request->active
         ]);
-        Logs::store('Memperbarui penjual '. $seller->email);
+        Logs::store('Memperbarui Kasir '. $Customer->email);
         Alert::info('Berhasil Memperbarui Data','Sukses')->autoclose(4500);
         return redirect()->back();
     }
 
     public function destroy($uuid)
     {
-        $seller    =   User::where('uuid',$uuid)->firstOrFail();
-        $seller->delete();
-        Logs::store('Menghapus penjual '. $seller->email);
+        $Customer    =   User::where('uuid',$uuid)->firstOrFail();
+        $Customer->delete();
+        Logs::store('Menghapus Kasir '. $Customer->email);
         Alert::info('Berhasil Menghapus Data','Sukses')->autoclose(4500);
         return redirect()->back();
     }
@@ -121,7 +122,7 @@ class SellerController extends Controller
         foreach ($request->checked as $key => $value) {
             $data   =   User::where('uuid',$request->checked[$key])->firstOrFail();
             $data->delete();
-            Logs::store('Menghapus penjual '. $data->email);
+            Logs::store('Menghapus Kasir '. $data->email);
         }
 
         Alert::info('Data Terpilih Berhasil Di Hapus.','Sukses')->autoclose(4500);

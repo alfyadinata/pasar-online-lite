@@ -34,12 +34,8 @@ class PromotionController extends Controller
             return $checker;
         } )
         ->addColumn('product', function($row) {
-             $product = "Beta Test"; 
-            // $p  =   \App\Product::where('id',$row->product_id)->first();
-            // dd($p);
-            // $product0    =   \App\Product::where('id',$row)->first();
-            // $product    =   $p->name == null ? 'Ha' : $p->name;
-            // dd($product);
+            $p  =   \App\Product::where('id',$row->product_id)->first();
+            $product    =   $p->name == null ? 'Unknown' : $p->name;
             return $product;
         } )
         ->addColumn('start', function($row) {
@@ -50,17 +46,12 @@ class PromotionController extends Controller
             $finish = $row->finish == null ? 'Sekarang' : $row->finish;
             return $finish;
         } )
-        ->addColumn('action', function($row) {
-            $btn    =   '<a data-href="'.route("eCashier",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
-                            '<a href="'.route("delCashier",$row->uuid).'" class="delete btn btn-danger">
-                            Hapus
-                        </a>';
-            return $btn;
-        })->addColumn('status', function($row) {
+        ->addColumn('status', function($row) {
             $checker = $row->active == 1 ? 'Aktif' : 'Non-Aktif';
             return $checker;
-        } )->rawColumns(['action','status','product','checker'])->make(true);
+        } )->rawColumns(['status','product','checker'])->make(true);
     }
+
     public function index()
     {
         $promotions =   Promotion::latest()->get();

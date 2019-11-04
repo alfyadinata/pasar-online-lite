@@ -71,7 +71,7 @@ class TransactionUserController extends Controller
                     'user_id' => $userId,
                     'date' => date('Y-m-d'),
                     'payment_method' => 0,
-                    'admin_id'  => $request->admin_id,
+                    'admin_id' => $request->admin_id,
                     'invoice'   =>  $invoice,
                     'message'   => $cart->message,
                     'store_id'  => $product->store->id,
@@ -101,6 +101,12 @@ class TransactionUserController extends Controller
     public function destroy(Request $request)
     {
         
+    }
+
+    public function index()
+    {
+        $transactions    =   Transaction::where('status','<=',4)->where('user_id',auth()->user()->id)->get();
+        return view('transaction',compact('transactions'));        
     }
 
     public function history()

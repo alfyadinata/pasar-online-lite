@@ -20,7 +20,7 @@ class TopUpController extends Controller
                 return redirect('/');
             }
         }
-    }
+    } 
     
     public function index()
     {
