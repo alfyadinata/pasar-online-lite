@@ -85,10 +85,16 @@ class TransactionController extends Controller
                 return $date;
             })
             ->addColumn('action', function($row) {
-                $btn    =   '<a data-href="'.route("eTransaction",$row->uuid).'" class="openPopupEdit btn btn-primary">Edit</a> || '.
-                            '<a data-href="'.route("showTransaction",$row->uuid).'" class="openPopupShow btn btn-warning">Detail</a> || '.
-                                '<a href="'.route("delTransaction",$row->uuid).'" class="delete btn btn-danger">
-                                Hapus
+                if ($row->status == 4) {
+                    $btn    ='<a data-href="'.route("eTransaction",$row->uuid).'" class="openPopupEdit btn btn-warning">Detail</a> || '.
+                                '<a href="'.route("acceptTransaction",$row->uuid).'" class="accepted btn btn-default">
+                                Pesanan Diterima
+                            </a>';
+                            return $btn;
+                }
+                    $btn    ='<a data-href="'.route("eTransaction",$row->uuid).'" class="openPopupEdit btn btn-warning">Detail</a> || '.
+                                '<a href="'.route("acceptTransaction",$row->uuid).'" class="send btn btn-info">
+                                Kirim Pesanan
                             </a>';
                 return $btn;
             })->rawColumns(['action','customer','status','checker','date'])->make(true);
