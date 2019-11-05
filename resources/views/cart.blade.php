@@ -47,7 +47,7 @@
                                                     <td>Rp. {{ number_format($row->price,0 * $data->qty,'',',') }} .00</td>
                                                     <td>{{ $data->qty }}</td>
                                                     <td>
-                                                        <a href="" onclick="return confirm('Yakin Menghapus ini dari keranjang ?');" class="btn btn-sm btn-danger">X</a>
+                                                        <a href="{{ route('delCart',$data->uuid) }}" onclick="return confirm('Yakin Menghapus ini dari keranjang ?');" class="btn btn-sm btn-danger">X</a>
                                                     </td>
                                                 </tr>
                                                 @endif

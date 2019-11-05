@@ -98,11 +98,6 @@ class TransactionUserController extends Controller
         }
     }
 
-    public function destroy(Request $request)
-    {
-        
-    }
-
     public function index()
     {
         $transactions    =   Transaction::where('status','<=',4)->where('user_id',auth()->user()->id)->get();

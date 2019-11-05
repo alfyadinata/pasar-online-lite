@@ -62,7 +62,7 @@ class CartUserController extends Controller
     public function destroy($uuid)
     {
         $cart   =   Cart::where('uuid',$uuid)->firstOrFail();
-        Logs::store('Menghapus Keranjang, cart id = '.$check->id);
+        Logs::store('Menghapus Keranjang, cart id = '.$cart->id);
         $cart->delete();
         Alert::info('Berhasil Menghapus Dari Keranjang.','Sukses')->autoclose(4500);
         return redirect()->back();

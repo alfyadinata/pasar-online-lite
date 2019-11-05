@@ -71,7 +71,7 @@
 						<div class="footer_title">Hot News</div>
 						<ul class="footer_list">
 							@foreach(\App\Blog::latest()->Limit(5)->get() as $data)
-								<li><a href="">{{ $data->title }}</a></li>
+								<li><a href="{{ route('showBlog',$data->slug) }}">{{ $data->title }}</a></li>
 							@endforeach
 						</ul>
 					</div>

@@ -31,11 +31,14 @@
                     </div> -->
                     <div class="top_bar_user">
                         @if(auth()->check())
-                        <form action="{{ route('logout') }}" method="post">
-                                @csrf
-                            <button class="btn btn-default">Logout</button>
-                            <div><a href="{{ url('store-register') }}" class="btn btn-default">Buat Toko</a></div>
-                        </form>
+                            @if(auth()->user()->role_id == 4)
+                                <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                    <button class="btn btn-default">Logout</button>
+                                    <div><a href="{{ url('store-register') }}" class="btn btn-default">Buat Toko</a></div>
+                                </form>
+                            @endif
+
                         @else
                         <div class="user_icon"><img src="{{ asset('fe/images/user.svg')}}" alt=""></div>
                             <div><a href="{{ url('register') }}">Register</a></div>

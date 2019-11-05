@@ -48,7 +48,7 @@ Route::group(['middleware' => ['customer']], function () {
     Route::post('store-register','AuthController@postStoreRegister')->name('regStore');
     // wishlist
     Route::get('wishlist/{id}','WishListController@store')->name('postWishList');
-    // cart
+    // cart 
     Route::get('cart','CartUserController@index')->name('cart');
     Route::post('cart','CartUserController@store')->name('postCart');
     Route::get('cart/{uuid}','CartUserController@destroy')->name('delCart');

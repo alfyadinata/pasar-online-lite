@@ -21,11 +21,10 @@
                             <div class="cart_items">
                                 <ul class="cart_list">
                                     <div class="table-responsive">
-                                        <table class="table " style="width:800px;">
+                                    <table class="table " style="width:800px;">
                                             <thead>
                                                 <tr>
-                                                    <th>checkAll</th>
-                                                    <th style="width:20%;">Inv</th>
+                                                    <th style="width:20%;">Foto</th>
                                                     <th style="width:20%;">Produk</th>
                                                     <th style="width:20%;">Harga Satuan</th>
                                                     <th style="width:10%;">Total</th>
@@ -40,8 +39,6 @@
                                                 @endphp
                                                 @if($row != null)
                                                 <tr>
-                                                <td>{{ $data->invoice }}</td>
-                                                <td><input type="checkbox" checked value="{{ $data->id }}" name="cart_id[]" class="form-control"></td>
                                                     <td>
                                                         <img src="{{ asset('images/'.$row->foto) }}" style="width:35%;" alt="">
                                                     </td>

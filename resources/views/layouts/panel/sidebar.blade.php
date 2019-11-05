@@ -93,7 +93,7 @@
 					@endif
 					@if(auth()->user()->role_id == 3)
 						<li>
-							<a href="index.html"><i class="fa fa-home nav_icon nav_icon"></i>Dashboard</a>
+							<a href="{{ route('iDashboard') }}"><i class="fa fa-home nav_icon nav_icon"></i>Dashboard</a>
 						</li>
 						<li>
 							<a href="{{ route('iProduct') }}"> <i class="fa fa-briefcase nav_icon"></i>Product</a>

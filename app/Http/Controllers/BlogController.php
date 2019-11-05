@@ -34,13 +34,12 @@ class BlogController extends Controller
                         </div>';
             return $checker;
         } )
-        // ->addColumn('category', function($row) {
-        //     $category   =   $row->category->name;
-        //     return $category;
-        // } )
+        ->addColumn('category', function($row) {
+            $category   =   $row->category->name;
+            return $category;
+        } )
         ->addColumn('author', function($row) {
-            // $author =   $row->user->name;
-            $author = 'nannaa';
+            $author =   $row->user->name;
             return $author;
         } )
         ->addColumn('action', function($row) {

@@ -14,7 +14,9 @@
     @include('banner')
 
     @if(auth()->check())
-        @include('lastseen')
+        @if($lastseen != "")
+            @include('lastseen')
+        @endif
     @endif
     @include('latest-product')
     @include('hot-best-seller')
