@@ -72,7 +72,7 @@
                                             <div class="product_price">{{ number_format($data->price,0,'',',') }}.00</div>
                                             <div class="product_name"><div><a href="{{ route('showProduct',$data->slug) }}" tabindex="0">{{ $data->name }}</a></div></div>
                                         </div>
-										<a data-href="{{ route('postWishList',$data->id) }}" class="wishList">a<div class="product_fav"><i class="fas fa-heart wishQ"></i></div></a>
+										<a data-href="{{ route('postWishList',$data->id) }}" class="wishList"><div class="product_fav"><i class="fas fa-heart wishQ"></i></div></a>
                                     </div>
                                 @endforeach
 
