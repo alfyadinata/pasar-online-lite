@@ -187,6 +187,15 @@ Route::prefix('panel')->group(function () {
         // web config
         Route::get('config','ConfigController@index')->name('iConfig');
         Route::post('config','ConfigController@update');
+        // manage satuan
+        Route::get('api/Satuan','SatuanController@api')->name('apiSatuan');
+        Route::get('Satuan','SatuanController@index')->name('iSatuan');
+        Route::get('Satuan/create','SatuanController@create')->name('cSatuan');
+        Route::post('Satuan','SatuanController@store'); 
+        Route::get('Satuan/edit/{id}','SatuanController@edit')->name('eSatuan');
+        Route::post('Satuan/edit/{id}','SatuanController@update')->name('uSatuan');
+        Route::get('Satuan/delete/{id}','SatuanController@destroy')->name('delSatuan');
+        Route::delete('Satuan/delete-many','SatuanController@destroyMany')->name('delManySatuan');
     });
 });
 

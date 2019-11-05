@@ -20,6 +20,9 @@
 							<!-- /nav-second-level -->
 						</li>
 						<li>
+							<a href=""><i class="fa fa-th nav_icon"></i>Satuan</a>
+						</li>
+						<li>
 							<a href="#"><i class="fa fa-user nav_icon"></i>User<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
