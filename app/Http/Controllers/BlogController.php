@@ -65,7 +65,6 @@ class BlogController extends Controller
     public function store(Request $request) 
     {
         $check  =   Blog::where('title',$request->title)->first();
-        // dd($request->all());
         if ($check != null) {
             Alert::error('Ada Data Yang Sama.','Gagal')->autoclose(4500);
             return redirect()->back(); 
@@ -99,9 +98,16 @@ class BlogController extends Controller
     public function update(Request $request, $uuid)
     {
         $blog   =   Blog::where('uuid',$uuid)->firstOrFail();
-        $blog->update([
-            
-        ]);
+        $blog->title    =   $request->title;
+        $blog->slug     =   str_slug($request->title);
+        $blog->user_id  =   auth()->user()->id;
+        $blog->description  =   $request->description;
+        $blog->category_id  =   $request->category_id;
+        $blog->thumbnail    =   $request->file('thumbnail')->store('blogs');
+        $blog->update();
+        Logs::store('Memperbarui blog : '.$request->title);
+        Alert::success('Berhasil Memperbarui Data.','Sukses')->autoclose(4500);
+        return redirect()->route('iBlog');                        
     }
 
     public function destroy($uuid)

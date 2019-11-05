@@ -101,7 +101,7 @@
                         <div class="row">
                             <div class="form-group"> 
                                 <label for="inputEmail3" class="col-sm-2 control-label">Thumbnail</label>
-                                <img id="blah" src="{{ asset('images/'.$edit->foto) }}" alt="your image" style="width:40%;" />
+                                <img id="blah" src="{{ asset('images/'.$edit->thumbnail) }}" alt="your image" style="width:40%;" />
                                 <div class="col-sm-6"> 
                                     <input name="thumbnail" id="imgInp" accept="image/*" type="file" class="btn btn-default"> 
                                 </div> 
@@ -112,7 +112,7 @@
                             <div class="form-group"> 
                                 <label for="inputEmail3" class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-12"> 
-                                    <textarea name="description" id="editor" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea name="description" id="editor" cols="30" rows="10" class="form-control">{{ $edit->description }}</textarea>
                                 </div> 
                             </div>
                         </div>
