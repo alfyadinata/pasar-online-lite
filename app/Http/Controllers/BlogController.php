@@ -98,12 +98,13 @@ class BlogController extends Controller
     public function update(Request $request, $uuid)
     {
         $blog   =   Blog::where('uuid',$uuid)->firstOrFail();
+        $thumbnail  =   $request->thumbnail == null ? $blog->thumbnail : $request->file('thumbnail')->store('blogs');
         $blog->title    =   $request->title;
         $blog->slug     =   str_slug($request->title);
         $blog->user_id  =   auth()->user()->id;
         $blog->description  =   $request->description;
         $blog->category_id  =   $request->category_id;
-        $blog->thumbnail    =   $request->file('thumbnail')->store('blogs');
+        $blog->thumbnail    =   $thumbnail;
         $blog->update();
         Logs::store('Memperbarui blog : '.$request->title);
         Alert::success('Berhasil Memperbarui Data.','Sukses')->autoclose(4500);

@@ -128,6 +128,7 @@ Route::prefix('panel')->group(function () {
         Route::get('blog/create','BlogController@create')->name('cBlog');
         Route::post('blog/create','BlogController@store');
         Route::get('blog/edit/{uuid}','BlogController@edit')->name('eBlog');
+        Route::post('blog/edit/{uuid}','BlogController@update')->name('uBlog');
         Route::get('blog/delete/{uuid}','BlogController@destroy')->name('delBlog');
         Route::delete('blog/delete-many','BlogController@destroyMany')->name('delManyBlog');
         // cashier

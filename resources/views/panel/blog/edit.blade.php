@@ -73,7 +73,7 @@
                 <div class="table-responsive bs-example widget-shadow">
                     <h4>Buat</h4>
 
-                    <form action="" method="post">
+                    <form action="{{ route('uBlog',$edit->uuid) }}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
