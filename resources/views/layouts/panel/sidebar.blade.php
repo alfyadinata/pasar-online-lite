@@ -20,7 +20,7 @@
 							<!-- /nav-second-level -->
 						</li>
 						<li>
-							<a href=""><i class="fa fa-th nav_icon"></i>Satuan</a>
+							<a href="{{ route('iSatuan') }}"><i class="fa fa-th nav_icon"></i>Satuan</a>
 						</li>
 						<li>
 							<a href="#"><i class="fa fa-user nav_icon"></i>User<span class="fa arrow"></span></a>
