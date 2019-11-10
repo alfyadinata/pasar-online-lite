@@ -6,35 +6,25 @@
     <div class="main-page">
         <div class="tables">
             <h3 class="title1">TopUp Saldo</h3>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 TopUp
-            </button>
+            </button> -->
             <div class="table-responsive bs-example widget-shadow">
                 <h4>Saldo :</h4>
-                <form action="{{ route('delManyCategory') }}" onsubmit="return confirm('Yakin Ingin Menghapus Data Terpilih ?');" method="post">
-                    @csrf
-                    @method('delete')
-                    <button id="btnDel" class="btn btn-danger" style="display:none;">Hapus Terpilih</button>
-                    <table class="table table-bordered" id="datatable"> 
-                        <thead>
-                            <tr>
-                                <th>
-                                    <div class="custom-checkbox custom-control">
-                                        <input type="checkbox" id="checkAll" class="form-control">
-                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                                    </div>
-                                </th>
-
-                                <th>Nama Produk</th>
-                                <th>Mulai</th>
-                                <th>Selesai</th> 
-                            </tr> 
-                        </thead> 
-                        <tbody> 
-
-                        </tbody> 
-                    </table> 
-                </form>
+                <form action="" method="post">
+            @csrf
+            <div class="form-group">
+                <label>Email Customer</label>
+                <input type="text" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Nominal</label>
+                <input type="number" name="nominal" class="form-control">
+            </div>
+            <center>
+                <button class="btn btn-primary">Submit</button>
+            </center>
+        </form>
             </div>
         </div>
     </div>
@@ -51,20 +41,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
-            @csrf
-            <div class="form-group">
-                <label>Email Customer</label>
-                <input type="text" name="email" class="form-control">
-            </div>
-            <div class="form-group">
-                <label>Nominal</label>
-                <input type="number" name="nominal" class="form-control">
-            </div>
-            <center>
-                <button class="btn btn-primary">Submit</button>
-            </center>
-        </form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
